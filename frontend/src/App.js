@@ -25,6 +25,18 @@ const HomePage = () => {
   const location = useLocation();
 
   useEffect(() => {
+    if (!entered) {
+      window.__lenis?.stop();
+      document.body.style.overflow = "hidden";
+    } else {
+      window.__lenis?.start();
+      document.body.style.overflow = "";
+      if (window.__lenis) window.__lenis.scrollTo(0, { immediate: true });
+      else window.scrollTo(0, 0);
+    }
+  }, [entered]);
+
+  useEffect(() => {
     if (location.hash) {
       const el = document.getElementById(location.hash.slice(1));
       if (el) {

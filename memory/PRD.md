@@ -18,6 +18,10 @@ Personal portfolio for HANN.DEV — TJKT student (Networking · Linux · Securit
 - Motion: framer-motion (masked line-by-line hero reveal, scroll reveals, certificate flip) + lenis smooth scrolling + CSS editorial marquee; reduced-motion respected
 - Backend: FastAPI + MongoDB; `POST /api/contact` stores messages; `/api/status` + `/api/` retained
 
+## Implemented (2026-10-10, update 9)
+- Welcome screen rebuilt to match the user's reference image exactly: faint grid background (opacity-tuned per theme), 3 top icon buttons (code / lime user / globe), rotated lime squares with cyan circles, orange dots + triangles, bottom node motifs (lime hub + cyan nodes) with "// HANN.DEV / WELCOME" and "TJKT · NETWORKING" labels, white HANN.DEV • TJKT STUDENT badge, lime loading bar with "PREPARING YOUR EXPERIENCE...".
+- Enter behavior changed: Enter Portfolio button removed — visitors scroll down (wheel / touch swipe / ArrowDown / PageDown / Space / Enter / tap hint) to enter; page scroll is locked while welcome is open and position resets to top on entry. Accessible hint button "Scroll ke bawah untuk masuk" appears after the loading bar fills.
+
 ## Implemented (2026-10-10, update 8)
 - Email card is now a real mailto:farhanrr08@gmail.com link.
 - Contact form now forwards every message to farhanrr08@gmail.com via Emergent managed Resend (EMERGENT_EMAIL_KEY in backend/.env, from_name "HANN.DEV", reply-to owner inbox). Server-side template with full guardrail gate (_assert_safe_email), recipients/subject/body never caller-controlled, all interpolations escaped, no links in body. Messages still stored in MongoDB. Rate limit: 5 msgs/hour per IP (429 beyond). Verified: send returned 202 Accepted.
