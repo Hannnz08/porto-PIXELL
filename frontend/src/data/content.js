@@ -165,6 +165,32 @@ export const CERTIFICATES = [
       "https://customer-assets-lxgj4vgw.emergentagent.net/job_neo-brutal-night/artifacts/3682f065da1d6987_Sertifikat_FARHAN%20RIFQI%20RAMADHANI_Intermediate%20Associate%20Network%20Administrator%20-%20Nasional_page-0002.jpg",
     ],
   },
+  {
+    id: "cisco-networking-basics",
+    title: "Networking Basics",
+    issuer: "Cisco Networking Academy",
+    issued: "21 Mei 2026",
+    issuedLabel: "Terbit 21 Mei 2026",
+    credentialId: "9035efa2-14e3-4bee-b797-17f359add78a",
+    verifyUrl: null,
+    pages: [
+      "https://customer-assets-lxgj4vgw.emergentagent.net/job_neo-brutal-night/artifacts/d206b9def634c9de_cisco-networking-basics.jpg",
+    ],
+  },
+  {
+    id: "citraweb-pkl",
+    title: "Sertifikat Kompetensi PKL",
+    subtitle: "Praktik Kerja Lapangan · Periode 1 Jan 2026 – 30 Jun 2026",
+    issuer: "Citraweb Solusi Teknologi",
+    issued: "27 Juli 2026",
+    issuedLabel: "Terbit 27 Juli 2026",
+    credentialId: null,
+    verifyUrl: null,
+    pages: [
+      "https://customer-assets-lxgj4vgw.emergentagent.net/job_neo-brutal-night/artifacts/ea0fb2ae478c17a4_1000429152.webp",
+      "https://customer-assets-lxgj4vgw.emergentagent.net/job_neo-brutal-night/artifacts/792c611e56c757a6_1000429151.webp",
+    ],
+  },
 ];
 
 export const JOURNEY = [

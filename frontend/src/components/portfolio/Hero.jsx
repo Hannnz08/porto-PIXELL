@@ -11,7 +11,7 @@ const TITLE_LINES = [
 ];
 
 const EVIDENCE = [
-  { tag: "Sertifikat", tagColor: "lime", title: "3 Sertifikat", sub: "MTCNA terbit 30 Juni 2026", link: "Lihat sertifikat →", href: "#certificates", id: "certificate" },
+  { tag: "Sertifikat", tagColor: "lime", title: "5 Sertifikat", sub: "MTCNA · Cisco · DTA · Citraweb", link: "Lihat sertifikat →", href: "#certificates", id: "certificate" },
   { tag: "Proyek lab", tagColor: "cyan", title: "Dokumentasi lab", sub: "MikroTik · Ubuntu · Security", link: "Lihat proyek →", href: "#projects", id: "projects" },
   { tag: "Pendidikan", tagColor: "ghost", title: "SMK Ma'arif Kota Mungkid", sub: "TJKT · 2024–sekarang", link: "Lihat riwayat →", href: "#education", id: "education" },
 ];

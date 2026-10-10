@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
-import { Mail, Github, Linkedin, ArrowUpRight, Send } from "lucide-react";
+import { Mail, Github, Linkedin, Instagram, ArrowUpRight, Send } from "lucide-react";
 import { Reveal } from "./Reveal";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -14,6 +14,16 @@ const CHANNELS = [
     title: "Email",
     desc: "Untuk diskusi, proyek, dan peluang PKL.",
     meta: "[alamat email milikmu]",
+    url: null,
+  },
+  {
+    id: "instagram",
+    color: null,
+    icon: Instagram,
+    title: "Instagram",
+    desc: "Terhubung dan lihat keseharian saya.",
+    meta: "@0frhn.rfqi__",
+    url: "https://www.instagram.com/0frhn.rfqi__",
   },
   {
     id: "github",
@@ -21,7 +31,8 @@ const CHANNELS = [
     icon: Github,
     title: "GitHub",
     desc: "Lihat kode dan catatan proyek.",
-    meta: "[URL GitHub milikmu]",
+    meta: "github.com/Hannnz08",
+    url: "https://github.com/Hannnz08",
   },
   {
     id: "linkedin",
@@ -29,8 +40,8 @@ const CHANNELS = [
     icon: Linkedin,
     title: "LinkedIn",
     desc: "Terhubung secara profesional.",
-    meta: "[URL LinkedIn, tampil jika diisi]",
-    optional: true,
+    meta: "in/farhan-rifqi-ramadhani",
+    url: "https://www.linkedin.com/in/farhan-rifqi-ramadhani-652782404",
   },
 ];
 
@@ -70,25 +81,31 @@ export const Contact = () => {
             <div className="pd-contact-cards" style={{ width: "100%" }}>
               {CHANNELS.map((c) => {
                 const Icon = c.icon;
+                const TagName = c.url ? "a" : "div";
                 return (
-                  <div className="pd-cc" style={{ background: c.color }} key={c.id} data-testid={`contact-card-${c.id}`}>
+                  <TagName
+                    className="pd-cc"
+                    style={{
+                      background: c.color || "var(--surface)",
+                      color: c.color ? "#000000" : "var(--ink)",
+                      textDecoration: "none",
+                    }}
+                    key={c.id}
+                    data-testid={`contact-card-${c.id}`}
+                    {...(c.url ? { href: c.url, target: "_blank", rel: "noopener noreferrer" } : {})}
+                  >
                     <span className="pd-bx">
                       <Icon size={24} strokeWidth={2.25} aria-hidden="true" />
                     </span>
                     <span style={{ flex: 1 }}>
                       <b className="pd-h" style={{ display: "block" }}>
-                        {c.title}{" "}
-                        {c.optional && (
-                          <span className="pd-tag" style={{ verticalAlign: "middle" }}>
-                            Opsional
-                          </span>
-                        )}
+                        {c.title}
                       </b>
                       <small>{c.desc}</small>
                       <span className="pd-lbl">{c.meta}</span>
                     </span>
                     <ArrowUpRight size={24} strokeWidth={2.25} aria-hidden="true" />
-                  </div>
+                  </TagName>
                 );
               })}
             </div>

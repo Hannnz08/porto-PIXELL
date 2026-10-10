@@ -18,6 +18,10 @@ Personal portfolio for HANN.DEV — TJKT student (Networking · Linux · Securit
 - Motion: framer-motion (masked line-by-line hero reveal, scroll reveals, certificate flip) + lenis smooth scrolling + CSS editorial marquee; reduced-motion respected
 - Backend: FastAPI + MongoDB; `POST /api/contact` stores messages; `/api/status` + `/api/` retained
 
+## Implemented (2026-10-10, update 6)
+- Added 2 real certificates (5 total): Cisco Networking Academy "Networking Basics" (21 Mei 2026, Cert ID 9035efa2-…-add78a, 1 page) and Citraweb Solusi Teknologi "Sertifikat Kompetensi PKL" (27 Juli 2026, 2 pages, flip shows Daftar Nilai page). Hero evidence card now "5 Sertifikat · MTCNA · Cisco · DTA · Citraweb".
+- Real contact links wired: Instagram @0frhn.rfqi__, GitHub Hannnz08, LinkedIn farhan-rifqi-ramadhani (cards are now clickable, open in new tab). Email card stays a placeholder (no address supplied). Footer social links added (GitHub/LinkedIn/Instagram).
+
 ## Implemented (2026-10-10, update 5)
 - Full-view certificate modal is now flippable too: clicking the document performs the same 3D flip to page 2 (multi-page certs), with a "Klik gambar untuk membalik" hint; prev/next buttons stay in sync; single-page MTCNA modal stays static.
 

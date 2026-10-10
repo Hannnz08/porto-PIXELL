@@ -36,9 +36,33 @@ export const Footer = () => {
           <a href="/#projects" className="pd-fl" data-testid="footer-link-projects">
             Projects
           </a>
-          <span className="pd-lbl" style={{ color: "#858585" }}>
-            Email dan sosial: tampil jika diisi
-          </span>
+          <a
+            href="https://github.com/Hannnz08"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pd-fl"
+            data-testid="footer-link-github"
+          >
+            GitHub
+          </a>
+          <a
+            href="https://www.linkedin.com/in/farhan-rifqi-ramadhani-652782404"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pd-fl"
+            data-testid="footer-link-linkedin"
+          >
+            LinkedIn
+          </a>
+          <a
+            href="https://www.instagram.com/0frhn.rfqi__"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pd-fl"
+            data-testid="footer-link-instagram"
+          >
+            Instagram
+          </a>
         </nav>
         <span className="pd-lbl">© 2026 HANN.DEV</span>
       </div>
