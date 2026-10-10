@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { PixelIcon } from "./PixelIcon";
+import { PixelSprite } from "./PixelSprite";
 import { EASE } from "@/motion";
 
 const TITLE_LINES = [
@@ -56,6 +57,8 @@ export const Hero = ({ active }) => {
       onPointerMove={onPointerMove}
       onPointerLeave={onPointerLeave}
     >
+      <PixelSprite name="bolt" size={56} className="pd-sprite--hero-a" delay={0.6} />
+      <PixelSprite name="star" size={64} className="pd-sprite--hero-b" delay={1.2} />
       <div className="pd-hero-left">
         <motion.span
           className="pd-tag pd-tag--cyan"

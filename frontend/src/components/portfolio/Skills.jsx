@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { TopicIcon } from "./TopicIcon";
+import { PixelSprite } from "./PixelSprite";
 import { MotionBar, EASE } from "@/motion";
 import { SKILLS, SKILL_FILTERS } from "@/data/content";
 
@@ -12,6 +13,7 @@ export const Skills = () => {
 
   return (
     <section className="pd-section" id="skills" aria-labelledby="skills-title" data-testid="skills-section">
+      <PixelSprite name="terminal" size={110} className="pd-sprite--head" delay={0.3} />
       <Reveal>
         <div className="pd-sectionhead">
           <span className="pd-tag pd-tag--lime">02 / Technical Stack</span>

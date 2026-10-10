@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { PixelIcon } from "./PixelIcon";
+import { PixelSprite } from "./PixelSprite";
 import { MotionBar } from "@/motion";
 import { CERTIFICATES } from "@/data/content";
 
@@ -219,6 +220,7 @@ export const Certificates = () => {
 
   return (
     <section className="pd-section" id="certificates" aria-labelledby="certs-title" data-testid="certificates-section">
+      <PixelSprite name="star" size={80} className="pd-sprite--head" delay={0.5} />
       <Reveal>
         <div className="pd-sectionhead">
           <span className="pd-tag pd-tag--lime">04 / Certificates</span>

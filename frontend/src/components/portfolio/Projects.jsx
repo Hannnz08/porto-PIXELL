@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AnimatePresence, motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { PixelIcon } from "./PixelIcon";
+import { PixelSprite } from "./PixelSprite";
 import { Topology } from "./Topology";
 import { MotionBar, EASE, useFinePointer } from "@/motion";
 import { PROJECTS, PROJECT_FILTERS } from "@/data/content";
@@ -76,6 +77,7 @@ export const Projects = () => {
 
   return (
     <section className="pd-section" id="projects" aria-labelledby="projects-title" data-testid="projects-section">
+      <PixelSprite name="planet" size={88} className="pd-sprite--head" delay={0.9} />
       <Reveal>
         <div className="pd-sectionhead">
           <span className="pd-tag pd-tag--lime">03 / Selected Work</span>

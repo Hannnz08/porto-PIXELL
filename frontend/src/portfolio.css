@@ -2216,3 +2216,71 @@ textarea.pd-in {
         width: 100%;
     }
 }
+
+/* ---------- Pixel sprites (decorative) ---------- */
+.pd-section {
+    position: relative;
+}
+
+.pd-sectionhead {
+    position: relative;
+    z-index: 1;
+}
+
+.pd-sprite {
+    position: absolute;
+    z-index: 0;
+    line-height: 0;
+    pointer-events: none;
+}
+
+.pd-sprite svg {
+    image-rendering: pixelated;
+}
+
+.pd-float {
+    animation: pd-float 5s ease-in-out infinite;
+}
+
+@keyframes pd-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+.pd-sprite--head { top: 64px; right: 64px; }
+.pd-sprite--hero-a { left: 12px; top: 22%; }
+.pd-sprite--hero-b { right: 14px; bottom: 24px; }
+.pd-sprite--char { right: 48px; bottom: 20px; }
+.pd-sprite--cta { top: -20px; right: 24px; }
+
+.pd-keep,
+.pd-bigcta {
+    position: relative;
+}
+
+@media (max-width: 1024px) {
+    .pd-sprite {
+        display: none;
+    }
+
+    .pd-sprite--char {
+        display: block;
+    }
+
+    .pd-sprite--char svg {
+        width: 72px;
+        height: auto;
+    }
+}
+
+@media (max-width: 640px) {
+    .pd-sprite--char svg {
+        width: 52px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pd-float {
+        animation: none;
+    }
+}

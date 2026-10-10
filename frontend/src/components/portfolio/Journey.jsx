@@ -4,6 +4,7 @@ import { motion, useScroll, useReducedMotion } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { TopicIcon } from "./TopicIcon";
 import { PixelIcon } from "./PixelIcon";
+import { PixelSprite } from "./PixelSprite";
 import { MotionBar, EASE } from "@/motion";
 import { JOURNEY } from "@/data/content";
 
@@ -107,6 +108,7 @@ export const Journey = () => {
             <br />
             <span>Keep building. →</span>
           </p>
+          <PixelSprite name="character" size={120} className="pd-sprite--char" delay={0.2} />
         </aside>
       </Reveal>
     </section>

@@ -18,6 +18,9 @@ Personal portfolio for HANN.DEV — TJKT student (Networking · Linux · Securit
 - Motion: framer-motion (masked line-by-line hero reveal, scroll reveals, certificate flip) + lenis smooth scrolling + CSS editorial marquee; reduced-motion respected
 - Backend: FastAPI + MongoDB; `POST /api/contact` stores messages; `/api/status` + `/api/` retained
 
+## Implemented (2026-10-10, update 13)
+- Decorative pixel sprites added across empty areas, all hand-drawn in brand colors only (PixelSprite component, subtle float animation, hidden on ≤1024px except the character): bolt + star in hero padding zones, terminal (Skills head), cyan planet (Projects head), lime star (Certificates head), gradcap (Education head), pixel technician character (Journey "Keep learning" aside, scaled on mobile), orange network orb (Contact big CTA corner), lime pixel heart in the footer copyright, and pixel stars replacing every 4th separator in the marquee.
+
 ## Implemented (2026-10-10, update 12 — Pixel Art Design System)
 - Full 8-bit pixel reskin per user spec + references: fonts Silkscreen (display/headings/logo/marquee/nodes) + Press Start 2P (nav, buttons, tags, chips, labels) + Space Grotesk (body, unchanged). All border-radius removed globally (sharp square corners), lime ::selection.
 - Custom PixelIcon component: 26 hand-drawn 16×16 SVG icons (crispEdges) replacing every lucide icon — network, router (cyan LEDs), server, shield (lime core), wrench, rocket, gradcap, target, flag, book, cpu, mail, send, github, linkedin, instagram, code, user, globe, arrows, chevrons, menu, close, expand, flip.

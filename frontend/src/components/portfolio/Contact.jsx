@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { Reveal } from "./Reveal";
 import { PixelIcon } from "./PixelIcon";
+import { PixelSprite } from "./PixelSprite";
 import { MotionBar } from "@/motion";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -121,6 +122,7 @@ export const Contact = () => {
               <span className="pd-h">
                 Mari berkolaborasi <PixelIcon name="arrow-up-right" size={52} />
               </span>
+              <PixelSprite name="orb" size={64} className="pd-sprite--cta" delay={1.1} />
             </a>
 
             <form className="pd-form" id="contact-form" onSubmit={submit} data-testid="contact-form">

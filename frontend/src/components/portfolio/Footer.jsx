@@ -64,7 +64,9 @@ export const Footer = () => {
             Instagram
           </a>
         </nav>
-        <span className="pd-lbl">© 2026 HANN.DEV</span>
+        <span className="pd-lbl" style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+          © 2026 HANN.DEV <PixelIcon name="heart" size={14} />
+        </span>
       </div>
     </footer>
   );
