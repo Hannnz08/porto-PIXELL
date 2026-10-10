@@ -14,8 +14,8 @@ const CHANNELS = [
     icon: Mail,
     title: "Email",
     desc: "Untuk diskusi, proyek, dan peluang PKL.",
-    meta: "[alamat email milikmu]",
-    url: null,
+    meta: "farhanrr08@gmail.com",
+    url: "mailto:farhanrr08@gmail.com",
   },
   {
     id: "instagram",

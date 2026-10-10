@@ -18,6 +18,10 @@ Personal portfolio for HANN.DEV — TJKT student (Networking · Linux · Securit
 - Motion: framer-motion (masked line-by-line hero reveal, scroll reveals, certificate flip) + lenis smooth scrolling + CSS editorial marquee; reduced-motion respected
 - Backend: FastAPI + MongoDB; `POST /api/contact` stores messages; `/api/status` + `/api/` retained
 
+## Implemented (2026-10-10, update 8)
+- Email card is now a real mailto:farhanrr08@gmail.com link.
+- Contact form now forwards every message to farhanrr08@gmail.com via Emergent managed Resend (EMERGENT_EMAIL_KEY in backend/.env, from_name "HANN.DEV", reply-to owner inbox). Server-side template with full guardrail gate (_assert_safe_email), recipients/subject/body never caller-controlled, all interpolations escaped, no links in body. Messages still stored in MongoDB. Rate limit: 5 msgs/hour per IP (429 beyond). Verified: send returned 202 Accepted.
+
 ## Implemented (2026-10-10, update 7 — Premium Animation System)
 - Shared motion tokens (src/motion.js): EASE cubic-bezier(0.22,1,0.36,1), duration scale, useReduced/useFinePointer hooks, MotionBar (orange bar scale-X line reveal on all section heads).
 - Welcome: reduced-motion-safe (fade instead of mask), fade+vertical exit into homepage.
