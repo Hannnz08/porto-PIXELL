@@ -18,6 +18,9 @@ Personal portfolio for HANN.DEV — TJKT student (Networking · Linux · Securit
 - Motion: framer-motion (masked line-by-line hero reveal, scroll reveals, certificate flip) + lenis smooth scrolling + CSS editorial marquee; reduced-motion respected
 - Backend: FastAPI + MongoDB; `POST /api/contact` stores messages; `/api/status` + `/api/` retained
 
+## Implemented (2026-10-10, update 11)
+- Hero now shares the welcome screen's faint grid background (56px cells, same per-theme opacity) with a mask-image fade-out toward the marquee, unifying the welcome → homepage transition.
+
 ## Implemented (2026-10-10, update 10)
 - Bug fix: mobile (≤640px) Education timeline line no longer crosses content — the pd-tl--side variant selector had higher specificity than the mobile override, pinning the line at 236px. Mobile rule now covers all variants (line at 27px through the node badges). Verified at 430px for Education + Journey.
 

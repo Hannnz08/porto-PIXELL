@@ -552,6 +552,7 @@
 
 /* ---------- Hero ---------- */
 .pd-hero {
+    position: relative;
     max-width: 1440px;
     margin: 0 auto;
     padding: 64px 64px 72px;
@@ -560,6 +561,27 @@
     gap: 48px;
     align-items: stretch;
     scroll-margin-top: 96px;
+}
+
+.pd-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 56px 56px;
+    opacity: 0.06;
+    -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+}
+
+.dark .pd-hero::before {
+    opacity: 0.1;
+}
+
+.pd-hero > * {
+    position: relative;
 }
 
 .pd-hero-left {
