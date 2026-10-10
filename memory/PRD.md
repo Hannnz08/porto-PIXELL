@@ -18,6 +18,9 @@ Personal portfolio for HANN.DEV — TJKT student (Networking · Linux · Securit
 - Motion: framer-motion (masked line-by-line hero reveal, scroll reveals, certificate flip) + lenis smooth scrolling + CSS editorial marquee; reduced-motion respected
 - Backend: FastAPI + MongoDB; `POST /api/contact` stores messages; `/api/status` + `/api/` retained
 
+## Implemented (2026-10-10, update 10)
+- Bug fix: mobile (≤640px) Education timeline line no longer crosses content — the pd-tl--side variant selector had higher specificity than the mobile override, pinning the line at 236px. Mobile rule now covers all variants (line at 27px through the node badges). Verified at 430px for Education + Journey.
+
 ## Implemented (2026-10-10, update 9)
 - Welcome screen rebuilt to match the user's reference image exactly: faint grid background (opacity-tuned per theme), 3 top icon buttons (code / lime user / globe), rotated lime squares with cyan circles, orange dots + triangles, bottom node motifs (lime hub + cyan nodes) with "// HANN.DEV / WELCOME" and "TJKT · NETWORKING" labels, white HANN.DEV • TJKT STUDENT badge, lime loading bar with "PREPARING YOUR EXPERIENCE...".
 - Enter behavior changed: Enter Portfolio button removed — visitors scroll down (wheel / touch swipe / ArrowDown / PageDown / Space / Enter / tap hint) to enter; page scroll is locked while welcome is open and position resets to top on entry. Accessible hint button "Scroll ke bawah untuk masuk" appears after the loading bar fills.

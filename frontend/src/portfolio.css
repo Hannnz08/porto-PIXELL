@@ -2006,7 +2006,9 @@ textarea.pd-in {
         grid-column: auto;
     }
 
-    .pd-tl-line {
+    .pd-tl-line,
+    .pd-tl--side .pd-tl-line,
+    .pd-tl--center .pd-tl-line {
         left: 27px;
         margin-left: 0;
     }
