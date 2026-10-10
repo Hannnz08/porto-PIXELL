@@ -7,6 +7,7 @@ import { CERTIFICATES } from "@/data/content";
 const CertModal = ({ cert, onClose }) => {
   const [page, setPage] = useState(0);
   const total = cert.pages.length;
+  const flippable = total > 1;
 
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && onClose();
@@ -42,12 +43,36 @@ const CertModal = ({ cert, onClose }) => {
           </button>
         </div>
         <div className="pd-modal-body">
-          <img
-            className="pd-cert-doc pd-cert-doc--modal"
-            src={cert.pages[page]}
-            alt={`${cert.title} — halaman ${page + 1}`}
-            data-testid="certificate-modal-image"
-          />
+          {flippable ? (
+            <button
+              type="button"
+              className="pd-docflip"
+              onClick={() => setPage((p) => (p + 1) % total)}
+              aria-label={`Balik sertifikat — halaman ${page === 0 ? 2 : 1}`}
+              data-testid="certificate-modal-flip"
+            >
+              <div className={`pd-docflip-inner ${page === 1 ? "is-flipped" : ""}`}>
+                <img
+                  className="pd-cert-doc pd-cert-doc--modal"
+                  src={cert.pages[0]}
+                  alt={`${cert.title} — halaman 1`}
+                />
+                <img
+                  className="pd-cert-doc pd-cert-doc--modal pd-docflip-back"
+                  src={cert.pages[1]}
+                  alt={`${cert.title} — halaman 2`}
+                  data-testid="certificate-modal-image-back"
+                />
+              </div>
+            </button>
+          ) : (
+            <img
+              className="pd-cert-doc pd-cert-doc--modal"
+              src={cert.pages[page]}
+              alt={`${cert.title} — halaman ${page + 1}`}
+              data-testid="certificate-modal-image"
+            />
+          )}
         </div>
         <div className="pd-modal-foot">
           <button
@@ -59,6 +84,7 @@ const CertModal = ({ cert, onClose }) => {
           >
             ← Previous Page
           </button>
+          {flippable && <span className="pd-lbl pd-muted" style={{ alignSelf: "center" }}>Klik gambar untuk membalik</span>}
           <button
             type="button"
             className="pd-vb"

@@ -952,6 +952,43 @@
     margin: 0 auto;
 }
 
+.pd-docflip {
+    perspective: 1400px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    padding: 0;
+    display: block;
+    width: 100%;
+}
+
+.pd-docflip-inner {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pd-docflip-inner.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.pd-docflip-inner img {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.pd-docflip-back {
+    position: absolute;
+    inset: 0;
+    transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pd-docflip-inner {
+        transition: none;
+    }
+}
+
 .pd-ph {
     flex: 1;
     border: 2px dashed var(--line);
