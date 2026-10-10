@@ -1,4 +1,4 @@
-import { ArrowRight, Cpu, Network, Wrench, School } from "lucide-react";
+import { ArrowRight, Cpu, Network, Wrench } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { EDUCATION } from "@/data/content";
 
@@ -54,10 +54,16 @@ export const Education = () => {
                       display: "grid",
                       placeItems: "center",
                       border: "3px solid #000",
-                      background: "repeating-linear-gradient(135deg,#fff 0 10px,#F0F0F0 10px 20px)",
+                      background: "#FFFFFF",
+                      padding: 6,
                     }}
                   >
-                    <School size={28} strokeWidth={2} aria-hidden="true" />
+                    <img
+                      src={e.logo}
+                      alt={`Logo ${e.school}`}
+                      style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                      data-testid={`education-logo-${i + 1}`}
+                    />
                   </span>
                 </div>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
