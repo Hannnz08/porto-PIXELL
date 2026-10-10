@@ -1,0 +1,172 @@
+import { useState } from "react";
+import axios from "axios";
+import { toast } from "sonner";
+import { Mail, Github, Linkedin, ArrowUpRight, Send } from "lucide-react";
+import { Reveal } from "./Reveal";
+
+const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+
+const CHANNELS = [
+  {
+    id: "email",
+    color: "#00E5F0",
+    icon: Mail,
+    title: "Email",
+    desc: "Untuk diskusi, proyek, dan peluang PKL.",
+    meta: "[alamat email milikmu]",
+  },
+  {
+    id: "github",
+    color: "#E2F900",
+    icon: Github,
+    title: "GitHub",
+    desc: "Lihat kode dan catatan proyek.",
+    meta: "[URL GitHub milikmu]",
+  },
+  {
+    id: "linkedin",
+    color: "#FF5700",
+    icon: Linkedin,
+    title: "LinkedIn",
+    desc: "Terhubung secara profesional.",
+    meta: "[URL LinkedIn, tampil jika diisi]",
+    optional: true,
+  },
+];
+
+export const Contact = () => {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
+
+  const submit = async (e) => {
+    e.preventDefault();
+    setSending(true);
+    try {
+      await axios.post(`${API}/contact`, form);
+      toast.success("Pesan terkirim. Terima kasih!");
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      toast.error("Pesan gagal terkirim. Coba lagi.");
+    } finally {
+      setSending(false);
+    }
+  };
+
+  return (
+    <section className="pd-section" id="contact" aria-labelledby="contact-title" data-testid="contact-section">
+      <div className="pd-contact">
+        <Reveal>
+          <div style={{ display: "flex", flexDirection: "column", gap: 24, alignItems: "flex-start" }}>
+            <span className="pd-tag pd-tag--lime">06 / Get In Touch</span>
+            <h2 className="pd-h pd-h2" id="contact-title">
+              Let's
+              <br />
+              connect.
+            </h2>
+            <span className="pd-bar" aria-hidden="true" />
+            <p style={{ margin: 0, maxWidth: 440, fontSize: 18, lineHeight: 1.55 }}>
+              Jika ingin berdiskusi tentang jaringan komputer, proyek IT, atau peluang PKL, silakan hubungi saya.
+            </p>
+            <div className="pd-contact-cards" style={{ width: "100%" }}>
+              {CHANNELS.map((c) => {
+                const Icon = c.icon;
+                return (
+                  <div className="pd-cc" style={{ background: c.color }} key={c.id} data-testid={`contact-card-${c.id}`}>
+                    <span className="pd-bx">
+                      <Icon size={24} strokeWidth={2.25} aria-hidden="true" />
+                    </span>
+                    <span style={{ flex: 1 }}>
+                      <b className="pd-h" style={{ display: "block" }}>
+                        {c.title}{" "}
+                        {c.optional && (
+                          <span className="pd-tag" style={{ verticalAlign: "middle" }}>
+                            Opsional
+                          </span>
+                        )}
+                      </b>
+                      <small>{c.desc}</small>
+                      <span className="pd-lbl">{c.meta}</span>
+                    </span>
+                    <ArrowUpRight size={24} strokeWidth={2.25} aria-hidden="true" />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+            <a href="#contact-form" className="pd-bigcta" data-testid="contact-bigcta">
+              <span className="pd-lbl" style={{ alignSelf: "flex-start", background: "#fff", color: "#000", border: "2px solid #000", padding: "2px 8px" }}>
+                Open for discussion
+              </span>
+              <span className="pd-h">
+                Mari berkolaborasi <ArrowUpRight size={56} strokeWidth={3} aria-hidden="true" />
+              </span>
+            </a>
+
+            <form className="pd-form" id="contact-form" onSubmit={submit} data-testid="contact-form">
+              <h3 className="pd-h">Kirim pesan</h3>
+              <div className="pd-fg">
+                <label className="pd-lbl" htmlFor="contact-name">
+                  Nama
+                </label>
+                <input
+                  id="contact-name"
+                  className="pd-in"
+                  autoComplete="name"
+                  required
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                  data-testid="contact-name-input"
+                />
+              </div>
+              <div className="pd-fg">
+                <label className="pd-lbl" htmlFor="contact-email">
+                  Email
+                </label>
+                <input
+                  id="contact-email"
+                  className="pd-in"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  data-testid="contact-email-input"
+                />
+              </div>
+              <div className="pd-fg">
+                <label className="pd-lbl" htmlFor="contact-message">
+                  Pesan
+                </label>
+                <textarea
+                  id="contact-message"
+                  className="pd-in"
+                  rows="4"
+                  required
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  data-testid="contact-message-input"
+                />
+              </div>
+              <button
+                type="submit"
+                className="pd-btn"
+                style={{ justifyContent: "center", minHeight: 48 }}
+                disabled={sending}
+                data-testid="contact-submit-button"
+              >
+                {sending ? "Mengirim..." : "Kirim pesan"} <Send size={18} strokeWidth={2.5} />
+              </button>
+              <p className="pd-lbl" style={{ margin: 0, fontSize: 13 }}>
+                Pesan sukses hanya tampil setelah server menerima
+              </p>
+            </form>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+};
