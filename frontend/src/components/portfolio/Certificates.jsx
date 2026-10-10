@@ -107,50 +107,61 @@ const CertCard = ({ cert, onView, delay }) => {
               </div>
             </div>
             <div className="pd-face pd-face--back">
-              <div className="pd-cert-meta">
-                <span className="pd-lbl">Detail sertifikat</span>
-                <dl>
-                  <div>
-                    <dt>Judul</dt>
-                    <dd>{cert.title}</dd>
-                  </div>
-                  {cert.subtitle && (
+              {cert.pages.length > 1 ? (
+                <div className="pd-cert-im">
+                  <img
+                    className="pd-cert-doc"
+                    src={cert.pages[1]}
+                    alt={`${cert.title} — halaman 2`}
+                    data-testid={`certificate-back-image-${cert.id}`}
+                  />
+                </div>
+              ) : (
+                <div className="pd-cert-meta">
+                  <span className="pd-lbl">Detail sertifikat</span>
+                  <dl>
                     <div>
-                      <dt>Deskripsi</dt>
-                      <dd>{cert.subtitle}</dd>
+                      <dt>Judul</dt>
+                      <dd>{cert.title}</dd>
                     </div>
-                  )}
-                  <div>
-                    <dt>Penerbit</dt>
-                    <dd>{cert.issuer}</dd>
-                  </div>
-                  <div>
-                    <dt>Tanggal terbit</dt>
-                    <dd>{cert.issued}</dd>
-                  </div>
-                  <div>
-                    <dt>ID kredensial</dt>
-                    <dd style={{ wordBreak: "break-all" }}>{cert.credentialId}</dd>
-                  </div>
-                  {cert.verifyUrl && (
+                    {cert.subtitle && (
+                      <div>
+                        <dt>Deskripsi</dt>
+                        <dd>{cert.subtitle}</dd>
+                      </div>
+                    )}
                     <div>
-                      <dt>Kredensial</dt>
-                      <dd>
-                        <a
-                          href={cert.verifyUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{ color: "inherit", textDecoration: "underline" }}
-                          onClick={(e) => e.stopPropagation()}
-                          data-testid={`certificate-verify-link-${cert.id}`}
-                        >
-                          Verifikasi kredensial <ExternalLink size={12} style={{ display: "inline" }} />
-                        </a>
-                      </dd>
+                      <dt>Penerbit</dt>
+                      <dd>{cert.issuer}</dd>
                     </div>
-                  )}
-                </dl>
-              </div>
+                    <div>
+                      <dt>Tanggal terbit</dt>
+                      <dd>{cert.issued}</dd>
+                    </div>
+                    <div>
+                      <dt>ID kredensial</dt>
+                      <dd style={{ wordBreak: "break-all" }}>{cert.credentialId}</dd>
+                    </div>
+                    {cert.verifyUrl && (
+                      <div>
+                        <dt>Kredensial</dt>
+                        <dd>
+                          <a
+                            href={cert.verifyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{ color: "inherit", textDecoration: "underline" }}
+                            onClick={(e) => e.stopPropagation()}
+                            data-testid={`certificate-verify-link-${cert.id}`}
+                          >
+                            Verifikasi kredensial <ExternalLink size={12} style={{ display: "inline" }} />
+                          </a>
+                        </dd>
+                      </div>
+                    )}
+                  </dl>
+                </div>
+              )}
               <div className="pd-cert-ft">
                 <div className="pd-cert-row">
                   <span className="pd-chip">

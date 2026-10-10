@@ -18,6 +18,9 @@ Personal portfolio for HANN.DEV — TJKT student (Networking · Linux · Securit
 - Motion: framer-motion (masked line-by-line hero reveal, scroll reveals, certificate flip) + lenis smooth scrolling + CSS editorial marquee; reduced-motion respected
 - Backend: FastAPI + MongoDB; `POST /api/contact` stores messages; `/api/status` + `/api/` retained
 
+## Implemented (2026-10-10, update 4)
+- Flip behavior updated per user request: 2-page certificates (both DTA) show the real page-2 scan on the card's back face; 1-page MTCNA keeps the metadata back face. Modal viewer unchanged (prev/next across pages).
+
 ## Implemented (2026-10-10, update 3)
 - Hero evidence card now reads "3 Sertifikat · MTCNA terbit 30 Juni 2026".
 - Real school logos displayed in Education timeline cards: SD Muhammadiyah Tempuran (01), SMP Negeri 3 Mertoyudan (02), SMK Ma'arif Kota Mungkid (03) — logos kept authentic (white framed box, no recolor).
