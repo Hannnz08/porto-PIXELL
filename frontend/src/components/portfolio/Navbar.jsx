@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Moon, Sun, Menu, X } from "lucide-react";
-import { useTheme } from "@/theme";
 import { EASE } from "@/motion";
+import { PixelIcon } from "./PixelIcon";
 import { NAV_LINKS } from "@/data/content";
 
 export const Navbar = () => {
-  const { dark, toggle } = useTheme();
   const [active, setActive] = useState("home");
   const [open, setOpen] = useState(false);
   const location = useLocation();
@@ -78,16 +76,6 @@ export const Navbar = () => {
           })}
         </div>
         <div className="pd-navactions">
-          <button
-            type="button"
-            className="pd-iconbtn"
-            onClick={toggle}
-            aria-pressed={dark}
-            aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-            data-testid="theme-toggle-button"
-          >
-            {dark ? <Sun size={20} strokeWidth={2.25} /> : <Moon size={20} strokeWidth={2.25} />}
-          </button>
           <a href="/#contact" className="pd-btn" data-testid="nav-cta-contact" onClick={(e) => go(e, "contact")}>
             Let's Talk
           </a>
@@ -99,7 +87,7 @@ export const Navbar = () => {
             aria-expanded={open}
             onClick={() => setOpen((o) => !o)}
           >
-            {open ? <X size={20} strokeWidth={2.25} /> : <Menu size={20} strokeWidth={2.25} />}
+            <PixelIcon name={open ? "close" : "menu"} size={20} />
           </button>
         </div>
       </nav>

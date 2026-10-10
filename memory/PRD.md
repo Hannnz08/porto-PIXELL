@@ -18,6 +18,13 @@ Personal portfolio for HANN.DEV — TJKT student (Networking · Linux · Securit
 - Motion: framer-motion (masked line-by-line hero reveal, scroll reveals, certificate flip) + lenis smooth scrolling + CSS editorial marquee; reduced-motion respected
 - Backend: FastAPI + MongoDB; `POST /api/contact` stores messages; `/api/status` + `/api/` retained
 
+## Implemented (2026-10-10, update 12 — Pixel Art Design System)
+- Full 8-bit pixel reskin per user spec + references: fonts Silkscreen (display/headings/logo/marquee/nodes) + Press Start 2P (nav, buttons, tags, chips, labels) + Space Grotesk (body, unchanged). All border-radius removed globally (sharp square corners), lime ::selection.
+- Custom PixelIcon component: 26 hand-drawn 16×16 SVG icons (crispEdges) replacing every lucide icon — network, router (cyan LEDs), server, shield (lime core), wrench, rocket, gradcap, target, flag, book, cpu, mail, send, github, linkedin, instagram, code, user, globe, arrows, chevrons, menu, close, expand, flip.
+- Light mode ONLY: theme toggle and theme context removed; .dark token block deleted (a few inert .dark overrides remain in CSS, unreachable).
+- Welcome loading bar now fills with retro steps(14) animation. Real assets (certificates, school logos) untouched.
+- Verified desktop + mobile 375: no horizontal overflow, all sections cohesive, no console errors.
+
 ## Implemented (2026-10-10, update 11)
 - Hero now shares the welcome screen's faint grid background (56px cells, same per-theme opacity) with a mask-image fade-out toward the marquee, unifying the welcome → homepage transition.
 

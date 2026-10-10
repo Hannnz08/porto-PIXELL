@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, useScroll, useReducedMotion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { TopicIcon } from "./TopicIcon";
+import { PixelIcon } from "./PixelIcon";
 import { MotionBar, EASE } from "@/motion";
 import { JOURNEY } from "@/data/content";
 
@@ -73,7 +73,7 @@ export const Journey = () => {
                         className="pd-btn pd-btn--surface"
                         data-testid={`journey-link-${l.slug}`}
                       >
-                        {l.label} <ArrowUpRight size={16} strokeWidth={2.25} />
+                        {l.label} <PixelIcon name="arrow-up-right" size={16} />
                       </Link>
                     ))}
                   </div>

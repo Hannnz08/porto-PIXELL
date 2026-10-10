@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
-import { Mail, Github, Linkedin, Instagram, ArrowUpRight, Send } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { PixelIcon } from "./PixelIcon";
 import { MotionBar } from "@/motion";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -11,7 +11,7 @@ const CHANNELS = [
   {
     id: "email",
     color: "#00E5F0",
-    icon: Mail,
+    icon: "mail",
     title: "Email",
     desc: "Untuk diskusi, proyek, dan peluang PKL.",
     meta: "farhanrr08@gmail.com",
@@ -20,7 +20,7 @@ const CHANNELS = [
   {
     id: "instagram",
     color: null,
-    icon: Instagram,
+    icon: "instagram",
     title: "Instagram",
     desc: "Terhubung dan lihat keseharian saya.",
     meta: "@0frhn.rfqi__",
@@ -29,7 +29,7 @@ const CHANNELS = [
   {
     id: "github",
     color: "#E2F900",
-    icon: Github,
+    icon: "github",
     title: "GitHub",
     desc: "Lihat kode dan catatan proyek.",
     meta: "github.com/Hannnz08",
@@ -38,7 +38,7 @@ const CHANNELS = [
   {
     id: "linkedin",
     color: "#FF5700",
-    icon: Linkedin,
+    icon: "linkedin",
     title: "LinkedIn",
     desc: "Terhubung secara profesional.",
     meta: "in/farhan-rifqi-ramadhani",
@@ -81,7 +81,6 @@ export const Contact = () => {
             </p>
             <div className="pd-contact-cards" style={{ width: "100%" }}>
               {CHANNELS.map((c) => {
-                const Icon = c.icon;
                 const TagName = c.url ? "a" : "div";
                 return (
                   <TagName
@@ -96,7 +95,7 @@ export const Contact = () => {
                     {...(c.url ? { href: c.url, target: "_blank", rel: "noopener noreferrer" } : {})}
                   >
                     <span className="pd-bx">
-                      <Icon size={24} strokeWidth={2.25} aria-hidden="true" />
+                      <PixelIcon name={c.icon} size={26} />
                     </span>
                     <span style={{ flex: 1 }}>
                       <b className="pd-h" style={{ display: "block" }}>
@@ -105,7 +104,7 @@ export const Contact = () => {
                       <small>{c.desc}</small>
                       <span className="pd-lbl">{c.meta}</span>
                     </span>
-                    <ArrowUpRight size={24} strokeWidth={2.25} aria-hidden="true" />
+                    <PixelIcon name="arrow-up-right" size={24} />
                   </TagName>
                 );
               })}
@@ -120,7 +119,7 @@ export const Contact = () => {
                 Open for discussion
               </span>
               <span className="pd-h">
-                Mari berkolaborasi <ArrowUpRight size={56} strokeWidth={3} aria-hidden="true" />
+                Mari berkolaborasi <PixelIcon name="arrow-up-right" size={52} />
               </span>
             </a>
 
@@ -176,7 +175,7 @@ export const Contact = () => {
                 disabled={sending}
                 data-testid="contact-submit-button"
               >
-                {sending ? "Mengirim..." : "Kirim pesan"} <Send size={18} strokeWidth={2.5} />
+                {sending ? "Mengirim..." : "Kirim pesan"} <PixelIcon name="send" size={18} />
               </button>
               <p className="pd-lbl" style={{ margin: 0, fontSize: 13 }}>
                 Pesan sukses hanya tampil setelah server menerima

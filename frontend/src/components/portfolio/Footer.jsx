@@ -1,4 +1,4 @@
-import { ArrowUp } from "lucide-react";
+import { PixelIcon } from "./PixelIcon";
 
 export const Footer = () => {
   const toTop = () => {
@@ -19,7 +19,7 @@ export const Footer = () => {
           HANN.DEV
         </a>
         <button type="button" className="pd-btt" onClick={toTop} data-testid="back-to-top-button">
-          Back to top <ArrowUp size={18} strokeWidth={2.5} />
+          Back to top <PixelIcon name="arrow-up" size={18} />
         </button>
       </div>
 

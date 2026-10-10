@@ -1,5 +1,5 @@
-import { ArrowRight, GraduationCap, Target, Flag, BookOpen, Network } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { PixelIcon } from "./PixelIcon";
 import { MotionBar } from "@/motion";
 
 const CARDS = [
@@ -7,7 +7,7 @@ const CARDS = [
     id: "pendidikan",
     num: "01",
     color: "cyan",
-    icon: GraduationCap,
+    icon: "gradcap",
     title: "Pendidikan",
     body: <p>SMK Ma'arif Kota Mungkid. Jurusan Teknik Jaringan Komputer dan Telekomunikasi.</p>,
   },
@@ -15,7 +15,7 @@ const CARDS = [
     id: "fokus",
     num: "02",
     color: "lime",
-    icon: Target,
+    icon: "target",
     title: "Fokus Karier",
     body: <p>Network Engineer / System Administrator.</p>,
   },
@@ -23,7 +23,7 @@ const CARDS = [
     id: "tujuan",
     num: "03",
     color: "panel",
-    icon: Flag,
+    icon: "flag",
     title: "Tujuan",
     body: (
       <p>
@@ -39,7 +39,7 @@ const CARDS = [
     id: "bidang",
     num: "04",
     color: "panel",
-    icon: BookOpen,
+    icon: "book",
     title: "Bidang yang Dipelajari",
     body: (
       <ul className="pd-mini">
@@ -73,32 +73,29 @@ export const About = () => {
               langsung.
             </p>
             <a href="#skills" className="pd-btn" data-testid="about-cta-skills">
-              Lihat Skills <ArrowRight size={16} strokeWidth={2.25} />
+              Lihat Skills <PixelIcon name="arrow-right" size={16} />
             </a>
             <span className="pd-lbl pd-muted">// about.tjkt</span>
           </div>
         </Reveal>
 
         <div className="pd-about-cards">
-          {CARDS.map((c, i) => {
-            const Icon = c.icon;
-            return (
-              <Reveal key={c.id} delay={i * 0.08}>
-                <article
-                  className={`pd-card ${c.color === "panel" ? "pd-card--panel" : `pd-card--accent pd-card--${c.color}`}`}
-                  data-testid={`about-card-${c.id}`}
-                  style={{ gap: 8 }}
-                >
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <Icon size={28} strokeWidth={2} aria-hidden="true" />
-                    <span className="pd-tag">{c.num}</span>
-                  </div>
-                  <h3 className="pd-h">{c.title}</h3>
-                  {c.body}
-                </article>
-              </Reveal>
-            );
-          })}
+          {CARDS.map((c, i) => (
+            <Reveal key={c.id} delay={i * 0.08}>
+              <article
+                className={`pd-card ${c.color === "panel" ? "pd-card--panel" : `pd-card--accent pd-card--${c.color}`}`}
+                data-testid={`about-card-${c.id}`}
+                style={{ gap: 8 }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <PixelIcon name={c.icon} size={30} />
+                  <span className="pd-tag">{c.num}</span>
+                </div>
+                <h3 className="pd-h">{c.title}</h3>
+                {c.body}
+              </article>
+            </Reveal>
+          ))}
         </div>
 
         <Reveal delay={0.15} className="pd-about-fig">
@@ -117,7 +114,7 @@ export const About = () => {
             />
             <div className="pd-portrait" style={{ aspectRatio: "3 / 4" }}>
               <div className="pd-portrait-inner">
-                <Network size={64} strokeWidth={1.75} aria-hidden="true" />
+                <PixelIcon name="network" size={64} />
                 <span className="pd-lbl">[Foto perangkat jaringan — ganti di sini]</span>
               </div>
             </div>

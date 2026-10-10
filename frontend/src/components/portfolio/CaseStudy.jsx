@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
+import { PixelIcon } from "./PixelIcon";
 import { Topology } from "./Topology";
 import { PROJECTS } from "@/data/content";
 
@@ -23,7 +23,7 @@ export const CaseStudy = () => {
           Project not found.
         </h1>
         <Link to="/" className="pd-btn" style={{ marginTop: 24, alignSelf: "flex-start" }} data-testid="case-back-home">
-          <ArrowLeft size={16} strokeWidth={2.25} /> Back to portfolio
+          <PixelIcon name="arrow-left" size={16} /> Back to portfolio
         </Link>
       </div>
     );
@@ -47,7 +47,7 @@ export const CaseStudy = () => {
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
       <Link to="/#projects" className="pd-btn pd-btn--surface" data-testid="case-back-link" style={{ alignSelf: "flex-start", marginBottom: 32 }}>
-        <ArrowLeft size={16} strokeWidth={2.25} /> All projects
+        <PixelIcon name="arrow-left" size={16} /> All projects
       </Link>
 
       <div className="pd-sectionhead" style={{ marginTop: 32 }}>

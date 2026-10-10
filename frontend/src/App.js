@@ -5,7 +5,6 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Lenis from "lenis";
 import { AnimatePresence } from "framer-motion";
 import { Toaster } from "sonner";
-import { ThemeProvider, useTheme } from "@/theme";
 import { Navbar } from "@/components/portfolio/Navbar";
 import { Welcome } from "@/components/portfolio/Welcome";
 import { Hero } from "@/components/portfolio/Hero";
@@ -68,16 +67,15 @@ const HomePage = () => {
 };
 
 const Shell = () => {
-  const { dark } = useTheme();
   return (
-    <div className="pd" data-theme={dark ? "dark" : "light"}>
+    <div className="pd">
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projects/:slug" element={<CaseStudy />} />
       </Routes>
       <Footer />
-      <Toaster position="bottom-right" theme={dark ? "dark" : "light"} />
+      <Toaster position="bottom-right" theme="light" />
     </div>
   );
 };
@@ -101,11 +99,9 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <Shell />
-      </BrowserRouter>
-    </ThemeProvider>
+    <BrowserRouter>
+      <Shell />
+    </BrowserRouter>
   );
 }
 

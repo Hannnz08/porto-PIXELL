@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { RotateCw, Expand, X, ExternalLink } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { PixelIcon } from "./PixelIcon";
 import { MotionBar } from "@/motion";
 import { CERTIFICATES } from "@/data/content";
 
@@ -40,7 +40,7 @@ const CertModal = ({ cert, onClose }) => {
             onClick={onClose}
             data-testid="certificate-modal-close"
           >
-            <X size={22} strokeWidth={2.5} />
+            <PixelIcon name="close" size={20} />
           </button>
         </div>
         <div className="pd-modal-body">
@@ -127,7 +127,7 @@ const CertCard = ({ cert, onView, delay }) => {
                 </span>
                 <div className="pd-cert-row">
                   <span className="pd-chip">
-                    Flip card <RotateCw size={14} strokeWidth={2.5} />
+                    Flip card <PixelIcon name="flip" size={14} />
                   </span>
                   {cert.pages.length > 1 && <span className="pd-tag">{cert.pages.length} halaman</span>}
                 </div>
@@ -181,7 +181,7 @@ const CertCard = ({ cert, onView, delay }) => {
                             onClick={(e) => e.stopPropagation()}
                             data-testid={`certificate-verify-link-${cert.id}`}
                           >
-                            Verifikasi kredensial <ExternalLink size={12} style={{ display: "inline" }} />
+                            Verifikasi kredensial ↗
                           </a>
                         </dd>
                       </div>
@@ -192,7 +192,7 @@ const CertCard = ({ cert, onView, delay }) => {
               <div className="pd-cert-ft">
                 <div className="pd-cert-row">
                   <span className="pd-chip">
-                    Back to front <RotateCw size={14} strokeWidth={2.5} />
+                    Back to front <PixelIcon name="flip" size={14} />
                   </span>
                 </div>
               </div>
@@ -206,7 +206,7 @@ const CertCard = ({ cert, onView, delay }) => {
             onClick={() => onView(cert)}
             data-testid={`certificate-view-full-button-${cert.id}`}
           >
-            View full certificate <Expand size={14} strokeWidth={2.5} />
+            View full certificate <PixelIcon name="expand" size={14} />
           </button>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, User } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { PixelIcon } from "./PixelIcon";
 import { EASE } from "@/motion";
 
 const TITLE_LINES = [
@@ -98,10 +98,10 @@ export const Hero = ({ active }) => {
           transition={{ delay: 0.9, duration: 0.5, ease: EASE }}
         >
           <a href="#projects" className="pd-btn" data-testid="hero-cta-projects">
-            Lihat Proyek <ArrowRight size={18} strokeWidth={2.5} />
+            Lihat Proyek <PixelIcon name="arrow-right" size={18} />
           </a>
           <a href="#contact" className="pd-btn pd-btn--surface" data-testid="hero-cta-contact">
-            Hubungi Saya <ArrowUpRight size={18} strokeWidth={2.5} />
+            Hubungi Saya <PixelIcon name="arrow-up-right" size={18} />
           </a>
         </motion.div>
 
@@ -119,7 +119,9 @@ export const Hero = ({ active }) => {
                 <small>{ev.sub}</small>
               </span>
               <span className="pd-lbl">{ev.link}</span>
-              <ArrowRight size={18} strokeWidth={2.5} className="pd-ev-arrow" aria-hidden="true" />
+              <span className="pd-ev-arrow">
+                <PixelIcon name="arrow-right" size={18} />
+              </span>
             </a>
           ))}
         </motion.div>
@@ -136,7 +138,7 @@ export const Hero = ({ active }) => {
             transition={{ delay: 0.5, duration: 0.7, ease: EASE }}
           >
             <div className="pd-portrait-inner">
-              <User size={64} strokeWidth={1.75} />
+              <PixelIcon name="user" size={64} />
               <span className="pd-lbl">[Foto asli — ganti di sini]</span>
             </div>
           </motion.div>

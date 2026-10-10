@@ -24,20 +24,6 @@
     --stripe-strong: rgba(0, 0, 0, 0.9);
 }
 
-.dark {
-    --bg: #000000;
-    --surface: #000000;
-    --ink: #FFFFFF;
-    --line: #FFFFFF;
-    --shadow: #FFFFFF;
-    --panel: rgba(255, 255, 255, 0.06);
-    --solid-panel: #000000;
-    --ph-a: #000000;
-    --ph-b: rgba(255, 255, 255, 0.09);
-    --stripe: rgba(255, 255, 255, 0.22);
-    --stripe-strong: rgba(255, 255, 255, 0.85);
-}
-
 .pd {
     background: var(--bg);
     color: var(--ink);
@@ -2128,5 +2114,105 @@ textarea.pd-in {
 
     .pd-mobilepanel {
         animation: none;
+    }
+}
+
+/* ============================================================
+   PIXEL SYSTEM — 8-bit layer (light mode only)
+   ============================================================ */
+
+.pd * {
+    border-radius: 0 !important;
+}
+
+.pd ::selection {
+    background: var(--lime);
+    color: #000000;
+}
+
+.pd-h,
+.pd-logo,
+.pd-skill-num,
+.pd-nd span,
+.pd-marquee-item {
+    font-family: "Silkscreen", "Archivo Black", sans-serif;
+}
+
+.pd-lbl,
+.pd-tag,
+.pd-chip,
+.pd-cat,
+.pd-dg-tag,
+.pd-btn,
+.pd-nl,
+.pd-f,
+.pd-vb,
+.pd-btt,
+.pd-fl,
+.pd-w-loadtext,
+.pd-w-corner-lbl,
+.pd-w-scrollhint,
+.pd-welcome-badge,
+.pd-cert-meta dt,
+.pd-mini li,
+.pd-chips li {
+    font-family: "Press Start 2P", "Space Grotesk", monospace;
+    letter-spacing: 0.04em;
+}
+
+.pd-btn { font-size: 10px; padding: 15px 18px; }
+.pd-nl { font-size: 9px; }
+.pd-tag,
+.pd-chip { font-size: 7px; padding: 5px 6px; }
+.pd-lbl { font-size: 8px; }
+.pd-f,
+.pd-vb { font-size: 8px; }
+.pd-welcome-badge { font-size: 8px; }
+.pd-fl { font-size: 9px; }
+.pd-mini li { font-size: 7px; }
+.pd-chips li { font-size: 7px; padding: 5px 7px; }
+
+.pd-hero-title { font-size: 54px; line-height: 1.06; }
+.pd-h2 { font-size: 42px; }
+.pd-welcome-title { font-size: clamp(26px, 4.4vw, 44px); }
+.pd-footer-title { font-size: 56px; }
+.pd-marquee-item { font-size: 22px; }
+.pd-logo { font-size: 17px; }
+.pd-keep .pd-h,
+.pd-cta .pd-h { font-size: 44px; }
+.pd-bigcta .pd-h { font-size: 38px; }
+.pd-pc-body h3,
+.pd-skill-title h3 { font-size: 21px; }
+.pd-cert-ft h3 { font-size: 15px; }
+.pd-modal-head h3 { font-size: 17px; }
+.pd-form h3 { font-size: 19px; }
+.pd-tl-year .pd-h { font-size: 26px; }
+.pd-edu-title { font-size: 24px; }
+
+.pd-w-bar-fill {
+    animation: pd-load 1.4s steps(14) 1.3s both;
+}
+
+@keyframes pd-load {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@media (max-width: 640px) {
+    .pd-hero-title { font-size: 30px; }
+    .pd-h2 { font-size: 27px; }
+    .pd-footer-title { font-size: 30px; }
+    .pd-keep .pd-h,
+    .pd-cta .pd-h { font-size: 24px; }
+    .pd-bigcta .pd-h { font-size: 21px; }
+    .pd-marquee-item { font-size: 16px; }
+    .pd-tl-year .pd-h { font-size: 20px; }
+    .pd-edu-title { font-size: 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pd-w-bar-fill {
+        animation: none;
+        width: 100%;
     }
 }

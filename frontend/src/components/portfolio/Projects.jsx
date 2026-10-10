@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { PixelIcon } from "./PixelIcon";
 import { Topology } from "./Topology";
 import { MotionBar, EASE, useFinePointer } from "@/motion";
 import { PROJECTS, PROJECT_FILTERS } from "@/data/content";
@@ -63,7 +63,7 @@ const ProjectCard = ({ p, idx }) => {
           aria-label={`View case study: ${p.title}`}
           data-testid={`project-case-link-${p.slug}`}
         >
-          View Case Study <ArrowRight size={16} strokeWidth={2.25} />
+          View Case Study <PixelIcon name="arrow-right" size={16} />
         </Link>
       </div>
     </motion.article>

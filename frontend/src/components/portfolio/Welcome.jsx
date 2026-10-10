@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { Code2, User, Globe, ChevronsDown } from "lucide-react";
+import { PixelIcon } from "./PixelIcon";
 
 const NodeMotif = ({ flip = false }) => (
   <svg
     viewBox="0 0 240 140"
     style={{ width: "100%", display: "block", transform: flip ? "scaleX(-1)" : "none" }}
+    shapeRendering="crispEdges"
     aria-hidden="true"
   >
     <line x1="118" y1="100" x2="22" y2="14" stroke="currentColor" strokeWidth="2.5" />
@@ -63,9 +64,9 @@ export const Welcome = ({ onEnter }) => {
 
       <div className="pd-w-deco" aria-hidden="true">
         <div className="pd-w-icons">
-          {[Code2, User, Globe].map((Icon, i) => (
-            <motion.span key={i} className={`pd-w-ic ${i === 1 ? "pd-w-ic--lime" : ""}`} {...fadeUp(reduced, 0.15 + i * 0.12)}>
-              <Icon size={24} strokeWidth={2.25} />
+          {["code", "user", "globe"].map((name, i) => (
+            <motion.span key={name} className={`pd-w-ic ${i === 1 ? "pd-w-ic--lime" : ""}`} {...fadeUp(reduced, 0.15 + i * 0.12)}>
+              <PixelIcon name={name} size={24} />
             </motion.span>
           ))}
         </div>
@@ -112,12 +113,7 @@ export const Welcome = ({ onEnter }) => {
 
       <motion.div className="pd-w-loadwrap" {...fadeUp(reduced, 1.15)}>
         <div className="pd-w-bar" role="presentation">
-          <motion.div
-            className="pd-w-bar-fill"
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            transition={{ delay: 1.3, duration: reduced ? 0.01 : 1.4, ease: [0.22, 1, 0.36, 1] }}
-          />
+          <div className="pd-w-bar-fill" />
         </div>
         <span className="pd-lbl pd-w-loadtext">Preparing your experience...</span>
       </motion.div>
@@ -136,7 +132,7 @@ export const Welcome = ({ onEnter }) => {
           transition={{ repeat: Infinity, duration: 1.6, ease: "easeInOut" }}
           style={{ display: "inline-flex", alignItems: "center", gap: 8 }}
         >
-          Scroll ke bawah untuk masuk <ChevronsDown size={16} strokeWidth={2.5} />
+          Scroll ke bawah untuk masuk <PixelIcon name="chevrons-down" size={16} />
         </motion.span>
       </motion.button>
 
