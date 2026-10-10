@@ -934,6 +934,24 @@
     transition: background-color 0.35s, border-color 0.35s;
 }
 
+.pd-cert-doc {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #FFFFFF;
+    border: 2px solid var(--line);
+    display: block;
+    transition: border-color 0.35s;
+}
+
+.pd-cert-doc--modal {
+    max-height: 62vh;
+    height: auto;
+    margin: 0 auto;
+}
+
 .pd-ph {
     flex: 1;
     border: 2px dashed var(--line);

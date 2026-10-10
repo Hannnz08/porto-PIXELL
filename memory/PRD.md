@@ -18,6 +18,10 @@ Personal portfolio for HANN.DEV — TJKT student (Networking · Linux · Securit
 - Motion: framer-motion (masked line-by-line hero reveal, scroll reveals, certificate flip) + lenis smooth scrolling + CSS editorial marquee; reduced-motion respected
 - Backend: FastAPI + MongoDB; `POST /api/contact` stores messages; `/api/status` + `/api/` retained
 
+## Implemented (2026-10-10, update 2)
+- Real certificates added: MTCNA (ID 2606NA9044, MikroTik, 30 Juni 2026, verify link mikrotik.com/certificates), DTA Fundamental of Associate Network Administrator - Nasional (2 pages, ID 21212087840-14431, 3 Okt 2026), DTA Intermediate Associate Network Administrator - Nasional (2 pages, ID 21212088840-4127, 4 Okt 2026). Flip cards show real scans; modal supports multi-page prev/next; metadata backs only use verified fields.
+- Awaiting upload: school logo (logo SMK Ma'arif Kota Mungkid) — requested from user, will replace the generic school icon in the Education timeline.
+
 ## Implemented (2026-10-10)
 - Welcome overlay (masked reveal, HANN.DEV • TJKT STUDENT badge, Enter Portfolio button)
 - Hero (Building Networks. Solving Problems. + evidence strip: MTCNA cert, lab docs, education; FIG.01 portrait placeholder with parallax)

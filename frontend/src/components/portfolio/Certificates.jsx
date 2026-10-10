@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { RotateCw, Expand, X } from "lucide-react";
+import { RotateCw, Expand, X, ExternalLink } from "lucide-react";
 import { Reveal } from "./Reveal";
-import { CERTIFICATE } from "@/data/content";
+import { CERTIFICATES } from "@/data/content";
 
-const CertModal = ({ onClose }) => {
+const CertModal = ({ cert, onClose }) => {
+  const [page, setPage] = useState(0);
+  const total = cert.pages.length;
+
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
@@ -20,26 +23,49 @@ const CertModal = ({ onClose }) => {
       exit={{ opacity: 0 }}
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div role="dialog" aria-modal="true" aria-label="Sertifikat" className="pd-modal">
+      <div role="dialog" aria-modal="true" aria-label={`Sertifikat ${cert.title}`} className="pd-modal">
         <div className="pd-modal-head">
           <div>
-            <h3 className="pd-h">{CERTIFICATE.title}</h3>
-            <span className="pd-lbl">Page 1 of 1</span>
+            <h3 className="pd-h">{cert.title}</h3>
+            <span className="pd-lbl">
+              Page {page + 1} of {total}
+            </span>
           </div>
-          <button type="button" className="pd-close" aria-label="Tutup" onClick={onClose} data-testid="certificate-modal-close">
+          <button
+            type="button"
+            className="pd-close"
+            aria-label="Tutup"
+            onClick={onClose}
+            data-testid="certificate-modal-close"
+          >
             <X size={22} strokeWidth={2.5} />
           </button>
         </div>
         <div className="pd-modal-body">
-          <div className="pd-ph">
-            <span className="pd-lbl">[Halaman 1 — gambar asli ukuran penuh]</span>
-          </div>
+          <img
+            className="pd-cert-doc pd-cert-doc--modal"
+            src={cert.pages[page]}
+            alt={`${cert.title} — halaman ${page + 1}`}
+            data-testid="certificate-modal-image"
+          />
         </div>
         <div className="pd-modal-foot">
-          <button type="button" className="pd-vb" disabled data-testid="certificate-prev-page">
+          <button
+            type="button"
+            className="pd-vb"
+            disabled={page === 0}
+            onClick={() => setPage((p) => p - 1)}
+            data-testid="certificate-prev-page"
+          >
             ← Previous Page
           </button>
-          <button type="button" className="pd-vb" disabled data-testid="certificate-next-page">
+          <button
+            type="button"
+            className="pd-vb"
+            disabled={page >= total - 1}
+            onClick={() => setPage((p) => p + 1)}
+            data-testid="certificate-next-page"
+          >
             Next Page →
           </button>
         </div>
@@ -48,9 +74,110 @@ const CertModal = ({ onClose }) => {
   );
 };
 
-export const Certificates = () => {
+const CertCard = ({ cert, onView, delay }) => {
   const [flipped, setFlipped] = useState(false);
-  const [open, setOpen] = useState(false);
+
+  return (
+    <Reveal delay={delay}>
+      <div>
+        <button
+          type="button"
+          className="pd-flip"
+          onClick={() => setFlipped((f) => !f)}
+          aria-pressed={flipped}
+          aria-label={`Sertifikat ${cert.title} — balik kartu`}
+          data-testid={`certificate-card-${cert.id}`}
+        >
+          <div className={`pd-flip-inner ${flipped ? "is-flipped" : ""}`}>
+            <div className="pd-face">
+              <div className="pd-cert-im">
+                <img className="pd-cert-doc" src={cert.pages[0]} alt={`${cert.title} — halaman 1`} />
+              </div>
+              <div className="pd-cert-ft">
+                <h3 className="pd-h">{cert.title}</h3>
+                <span className="pd-lbl">
+                  {cert.issuer} · {cert.issued}
+                </span>
+                <div className="pd-cert-row">
+                  <span className="pd-chip">
+                    Flip card <RotateCw size={14} strokeWidth={2.5} />
+                  </span>
+                  {cert.pages.length > 1 && <span className="pd-tag">{cert.pages.length} halaman</span>}
+                </div>
+              </div>
+            </div>
+            <div className="pd-face pd-face--back">
+              <div className="pd-cert-meta">
+                <span className="pd-lbl">Detail sertifikat</span>
+                <dl>
+                  <div>
+                    <dt>Judul</dt>
+                    <dd>{cert.title}</dd>
+                  </div>
+                  {cert.subtitle && (
+                    <div>
+                      <dt>Deskripsi</dt>
+                      <dd>{cert.subtitle}</dd>
+                    </div>
+                  )}
+                  <div>
+                    <dt>Penerbit</dt>
+                    <dd>{cert.issuer}</dd>
+                  </div>
+                  <div>
+                    <dt>Tanggal terbit</dt>
+                    <dd>{cert.issued}</dd>
+                  </div>
+                  <div>
+                    <dt>ID kredensial</dt>
+                    <dd style={{ wordBreak: "break-all" }}>{cert.credentialId}</dd>
+                  </div>
+                  {cert.verifyUrl && (
+                    <div>
+                      <dt>Kredensial</dt>
+                      <dd>
+                        <a
+                          href={cert.verifyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ color: "inherit", textDecoration: "underline" }}
+                          onClick={(e) => e.stopPropagation()}
+                          data-testid={`certificate-verify-link-${cert.id}`}
+                        >
+                          Verifikasi kredensial <ExternalLink size={12} style={{ display: "inline" }} />
+                        </a>
+                      </dd>
+                    </div>
+                  )}
+                </dl>
+              </div>
+              <div className="pd-cert-ft">
+                <div className="pd-cert-row">
+                  <span className="pd-chip">
+                    Back to front <RotateCw size={14} strokeWidth={2.5} />
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </button>
+        <div className="pd-cert-row" style={{ marginTop: 12 }}>
+          <button
+            type="button"
+            className="pd-vb"
+            onClick={() => onView(cert)}
+            data-testid={`certificate-view-full-button-${cert.id}`}
+          >
+            View full certificate <Expand size={14} strokeWidth={2.5} />
+          </button>
+        </div>
+      </div>
+    </Reveal>
+  );
+};
+
+export const Certificates = () => {
+  const [viewing, setViewing] = useState(null);
 
   return (
     <section className="pd-section" id="certificates" aria-labelledby="certs-title" data-testid="certificates-section">
@@ -66,67 +193,12 @@ export const Certificates = () => {
       </Reveal>
 
       <div className="pd-certs-grid">
-        <Reveal>
-          <div>
-            <button
-              type="button"
-              className="pd-flip"
-              onClick={() => setFlipped((f) => !f)}
-              aria-pressed={flipped}
-              aria-label={`Sertifikat ${CERTIFICATE.title} — balik kartu`}
-              data-testid="certificate-card"
-            >
-              <div className={`pd-flip-inner ${flipped ? "is-flipped" : ""}`}>
-                <div className="pd-face">
-                  <div className="pd-cert-im">
-                    <div className="pd-ph">
-                      <span className="pd-lbl">[Halaman 1 — gambar sertifikat asli]</span>
-                    </div>
-                  </div>
-                  <div className="pd-cert-ft">
-                    <h3 className="pd-h">{CERTIFICATE.title}</h3>
-                    <span className="pd-lbl">{CERTIFICATE.issued}</span>
-                    <div className="pd-cert-row">
-                      <span className="pd-chip">
-                        Flip card <RotateCw size={14} strokeWidth={2.5} />
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div className="pd-face pd-face--back">
-                  <div className="pd-cert-meta">
-                    <span className="pd-lbl">Detail sertifikat</span>
-                    <dl>
-                      <div>
-                        <dt>Judul</dt>
-                        <dd>{CERTIFICATE.title}</dd>
-                      </div>
-                      <div>
-                        <dt>Tanggal terbit</dt>
-                        <dd>30 Juni 2026</dd>
-                      </div>
-                    </dl>
-                  </div>
-                  <div className="pd-cert-ft">
-                    <div className="pd-cert-row">
-                      <span className="pd-chip">
-                        Back to front <RotateCw size={14} strokeWidth={2.5} />
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </button>
-            <div className="pd-cert-row" style={{ marginTop: 12 }}>
-              <button type="button" className="pd-vb" onClick={() => setOpen(true)} data-testid="certificate-view-full-button">
-                View full certificate <Expand size={14} strokeWidth={2.5} />
-              </button>
-            </div>
-          </div>
-        </Reveal>
+        {CERTIFICATES.map((cert, i) => (
+          <CertCard key={cert.id} cert={cert} delay={i * 0.08} onView={setViewing} />
+        ))}
       </div>
 
-      <AnimatePresence>{open && <CertModal onClose={() => setOpen(false)} />}</AnimatePresence>
+      <AnimatePresence>{viewing && <CertModal cert={viewing} onClose={() => setViewing(null)} />}</AnimatePresence>
     </section>
   );
 };

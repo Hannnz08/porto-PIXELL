@@ -125,10 +125,47 @@ export const PROJECTS = [
   },
 ];
 
-export const CERTIFICATE = {
-  title: "MTCNA",
-  issued: "Terbit 30 Juni 2026",
-};
+export const CERTIFICATES = [
+  {
+    id: "mtcna",
+    title: "MTCNA",
+    subtitle: "MikroTik Certified Network Associate",
+    issuer: "MikroTik",
+    issued: "30 Juni 2026",
+    issuedLabel: "Terbit 30 Juni 2026",
+    credentialId: "2606NA9044",
+    verifyUrl: "https://mikrotik.com/certificates",
+    pages: [
+      "https://customer-assets-lxgj4vgw.emergentagent.net/job_neo-brutal-night/artifacts/a8863f0dafac18d0_mtcna.jpg",
+    ],
+  },
+  {
+    id: "dta-fundamental",
+    title: "Fundamental of Associate Network Administrator - Nasional",
+    issuer: "Digital Talent Academy · Digital Talent Scholarship 2026",
+    issued: "3 Oktober 2026",
+    issuedLabel: "Terbit 3 Oktober 2026",
+    credentialId: "21212087840-14431/DTA/BLSDM.Komdigi/2026",
+    verifyUrl: null,
+    pages: [
+      "https://customer-assets-lxgj4vgw.emergentagent.net/job_neo-brutal-night/artifacts/67d9124ed7451359_Sertifikat_FARHAN%20RIFQI%20RAMADHANI_Fundamental%20of%20Associate%20Network%20Administrator%20-%20Nasional_page-0001.jpg",
+      "https://customer-assets-lxgj4vgw.emergentagent.net/job_neo-brutal-night/artifacts/fda38f580d5c54e0_Sertifikat_FARHAN%20RIFQI%20RAMADHANI_Fundamental%20of%20Associate%20Network%20Administrator%20-%20Nasional_page-0002.jpg",
+    ],
+  },
+  {
+    id: "dta-intermediate",
+    title: "Intermediate Associate Network Administrator - Nasional",
+    issuer: "Digital Talent Academy · Digital Talent Scholarship 2026",
+    issued: "4 Oktober 2026",
+    issuedLabel: "Terbit 4 Oktober 2026",
+    credentialId: "21212088840-4127/DTA/BLSDM.Komdigi/2026",
+    verifyUrl: null,
+    pages: [
+      "https://customer-assets-lxgj4vgw.emergentagent.net/job_neo-brutal-night/artifacts/fe723feb387ed42e_Sertifikat_FARHAN%20RIFQI%20RAMADHANI_Intermediate%20Associate%20Network%20Administrator%20-%20Nasional_page-0001.jpg",
+      "https://customer-assets-lxgj4vgw.emergentagent.net/job_neo-brutal-night/artifacts/3682f065da1d6987_Sertifikat_FARHAN%20RIFQI%20RAMADHANI_Intermediate%20Associate%20Network%20Administrator%20-%20Nasional_page-0002.jpg",
+    ],
+  },
+];
 
 export const JOURNEY = [
   {
