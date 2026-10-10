@@ -128,7 +128,7 @@
     color: #000000;
     text-decoration: none;
     cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.1s, background-color 0.35s, color 0.35s;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s, color 0.35s;
 }
 
 .pd-btn:hover {
@@ -219,6 +219,7 @@
 }
 
 .pd-nl {
+    position: relative;
     font-size: 14px;
     font-weight: 700;
     text-transform: uppercase;
@@ -231,7 +232,7 @@
     min-height: 44px;
     display: inline-flex;
     align-items: center;
-    transition: border-color 0.1s, background-color 0.2s, color 0.35s;
+    transition: border-color 0.15s, background-color 0.2s, color 0.35s;
     white-space: nowrap;
 }
 
@@ -240,9 +241,27 @@
 }
 
 .pd-nl.is-active {
-    background: var(--lime);
     color: #000000;
+    border-color: transparent;
+}
+
+.pd-nl-pill {
+    position: absolute;
+    inset: 0;
+    background: var(--lime);
+    border: 3px solid #000000;
+    border-radius: 8px;
+}
+
+.pd-nl-text {
+    position: relative;
+    z-index: 1;
+}
+
+.pd-mobilepanel .pd-nl.is-active {
+    background: var(--lime);
     border-color: #000000;
+    color: #000000;
 }
 
 .pd-navactions {
@@ -263,7 +282,7 @@
     color: var(--ink);
     box-shadow: 4px 4px 0 var(--shadow);
     cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.1s, background-color 0.35s, color 0.35s;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s, color 0.35s;
 }
 
 .pd-iconbtn:hover {
@@ -288,6 +307,11 @@
 
 .pd-menubtn {
     display: none;
+}
+
+@keyframes pd-panel-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ---------- Layout ---------- */
@@ -456,7 +480,7 @@
     border-radius: 12px;
     box-shadow: 4px 4px 0 var(--shadow);
     text-decoration: none;
-    transition: transform 0.1s, box-shadow 0.1s, background-color 0.35s, color 0.35s;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s, color 0.35s;
 }
 
 .pd-ev:hover {
@@ -504,6 +528,7 @@
     height: 100%;
     background: var(--lime);
     border: 3px solid #000000;
+    will-change: transform;
 }
 
 .pd-portrait {
@@ -516,6 +541,7 @@
     display: grid;
     place-items: center;
     text-align: center;
+    will-change: transform;
     transition: background-color 0.35s, border-color 0.35s, box-shadow 0.35s;
 }
 
@@ -541,6 +567,7 @@
     gap: 8px;
     flex-wrap: wrap;
     justify-content: center;
+    will-change: transform;
 }
 
 /* ---------- Marquee ---------- */
@@ -600,7 +627,7 @@
     gap: 16px;
     background: var(--surface);
     color: var(--ink);
-    transition: transform 0.1s, box-shadow 0.1s, background-color 0.35s, color 0.35s, border-color 0.35s;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s, color 0.35s, border-color 0.35s;
 }
 
 .pd-card:hover {
@@ -641,7 +668,7 @@
     background: var(--surface);
     color: var(--ink);
     cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.1s, background-color 0.2s, color 0.35s;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.2s, color 0.35s;
 }
 
 .pd-f:hover {
@@ -714,6 +741,7 @@
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+    transition: background-color 0.15s;
 }
 
 .pd-chips--lime li {
@@ -793,12 +821,20 @@
     flex-direction: column;
     background: var(--surface);
     color: var(--ink);
-    transition: transform 0.1s, box-shadow 0.1s, background-color 0.35s, color 0.35s, border-color 0.35s;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s, color 0.35s, border-color 0.35s;
 }
 
 .pd-pc:hover {
     transform: translateY(-4px);
     box-shadow: 7px 7px 0 var(--shadow);
+}
+
+.pd-pc--tilt {
+    transition-property: box-shadow, background-color, color, border-color;
+}
+
+.pd-pc--tilt:hover {
+    transform: none;
 }
 
 .pd-pc--span7 { grid-column: span 7; }
@@ -834,6 +870,14 @@
     border: 2px solid #000000;
     padding: 2px 8px;
     font-size: 10px;
+}
+
+.pd-topo-node rect {
+    transition: fill 0.15s ease;
+}
+
+.pd-topo-node:hover rect {
+    fill: var(--lime);
 }
 
 .pd-pc-body {
@@ -983,23 +1027,6 @@
     transform: rotateY(180deg);
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .pd-docflip-inner {
-        transition: none;
-    }
-}
-
-.pd-ph {
-    flex: 1;
-    border: 2px dashed var(--line);
-    display: grid;
-    place-items: center;
-    text-align: center;
-    padding: 16px;
-    background: repeating-linear-gradient(135deg, var(--ph-a) 0 10px, var(--ph-b) 10px 20px);
-    transition: border-color 0.35s;
-}
-
 .pd-cert-ft {
     padding: 16px;
     display: flex;
@@ -1050,7 +1077,7 @@
     letter-spacing: 0.08em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.1s, background-color 0.35s, color 0.35s;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.35s, color 0.35s;
 }
 
 .pd-vb:hover {
@@ -1136,10 +1163,6 @@
     transition: background-color 0.35s;
 }
 
-.pd-modal-body .pd-ph {
-    height: 300px;
-}
-
 .pd-modal-foot {
     display: flex;
     justify-content: space-between;
@@ -1160,7 +1183,7 @@
     background: var(--orange);
     color: #000000;
     cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.1s;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .pd-close:active {
@@ -1178,24 +1201,20 @@
     gap: 40px;
 }
 
-.pd-tl::before {
-    content: "";
+.pd-tl-line {
     position: absolute;
     top: 0;
     bottom: 0;
+    left: 50%;
+    margin-left: -3px;
     width: 6px;
     background: var(--line);
+    transform-origin: top center;
     transition: background-color 0.35s;
 }
 
-.pd-tl--center::before {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.pd-tl--side::before {
+.pd-tl--side .pd-tl-line {
     left: 236px;
-    transform: translateX(-50%);
 }
 
 .pd-row {
@@ -1276,6 +1295,15 @@
 
 .pd-card--dashed {
     border-style: dashed;
+}
+
+.pd-edu-title {
+    font-size: 30px;
+    overflow-wrap: break-word;
+}
+
+.pd-edu-headtext {
+    min-width: 0;
 }
 
 .pd-tl-year {
@@ -1393,7 +1421,7 @@
     border-radius: 12px;
     box-shadow: 5px 5px 0 var(--shadow);
     color: #000000;
-    transition: transform 0.1s, box-shadow 0.1s;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .pd-cc:hover {
@@ -1427,7 +1455,7 @@
     border-radius: 16px;
     box-shadow: 7px 7px 0 var(--shadow);
     text-decoration: none;
-    transition: transform 0.1s, box-shadow 0.1s;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .pd-bigcta:hover {
@@ -1506,15 +1534,30 @@ textarea.pd-in {
     pointer-events: none;
 }
 
+@keyframes pd-drift-sq {
+    0%, 100% { transform: rotate(12deg) translate(0, 0); }
+    50% { transform: rotate(15deg) translate(-12px, 10px); }
+}
+
+@keyframes pd-drift-ci {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(10px, -12px); }
+}
+
+@keyframes pd-drift-tr {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-8px, -6px); }
+}
+
 .pd-footer-shapes .sq {
     position: absolute;
     right: 48px;
     top: 0;
     width: 160px;
     height: 160px;
-    transform: rotate(12deg);
     border: 3px solid #F0F0F0;
     background: var(--lime);
+    animation: pd-drift-sq 26s ease-in-out infinite;
 }
 
 .pd-footer-shapes .ci {
@@ -1526,6 +1569,7 @@ textarea.pd-in {
     border-radius: 50%;
     border: 3px solid #F0F0F0;
     background: var(--cyan);
+    animation: pd-drift-ci 20s ease-in-out infinite;
 }
 
 .pd-footer-shapes .tr {
@@ -1536,6 +1580,7 @@ textarea.pd-in {
     height: 96px;
     background: var(--orange);
     clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    animation: pd-drift-tr 23s ease-in-out infinite;
 }
 
 .pd-footer-top {
@@ -1567,7 +1612,7 @@ textarea.pd-in {
     letter-spacing: 0.04em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.1s;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .pd-btt:active {
@@ -1622,6 +1667,7 @@ textarea.pd-in {
     letter-spacing: 0.04em;
     color: #F0F0F0;
     text-decoration: none;
+    transition: color 0.15s;
 }
 
 .pd-fl:hover {
@@ -1672,6 +1718,7 @@ textarea.pd-in {
         border: 3px solid var(--line);
         border-radius: 12px;
         box-shadow: 5px 5px 0 var(--shadow);
+        animation: pd-panel-in 0.18s ease-out;
     }
 
     .pd-mobilepanel .pd-nl {
@@ -1760,6 +1807,15 @@ textarea.pd-in {
         min-width: 0;
     }
 
+    .pd-ev > .pd-lbl {
+        display: none;
+    }
+
+    .pd-ev-arrow {
+        display: block !important;
+        flex: none;
+    }
+
     .pd-skills-grid,
     .pd-certs-grid,
     .pd-learn-grid,
@@ -1781,11 +1837,9 @@ textarea.pd-in {
         grid-column: auto;
     }
 
-    .pd-tl::before,
-    .pd-tl--center::before,
-    .pd-tl--side::before {
+    .pd-tl-line {
         left: 27px;
-        transform: none;
+        margin-left: 0;
     }
 
     .pd-tl .pd-row,
@@ -1796,6 +1850,31 @@ textarea.pd-in {
 
     .pd-tl .pd-row > .pd-nd {
         grid-column: 1;
+    }
+
+    .pd-tl .pd-row > * {
+        min-width: 0;
+    }
+
+    .pd-tl .pd-card h3 {
+        font-size: 22px;
+        overflow-wrap: break-word;
+    }
+
+    .pd-edu-headrow {
+        flex-wrap: wrap;
+    }
+
+    .pd-edu-headtext {
+        flex: 1 1 100%;
+    }
+
+    .pd-edu-title {
+        font-size: 21px;
+    }
+
+    .pd-tl-year .pd-h {
+        font-size: 26px;
     }
 
     .pd-tl .pd-row > *:not(.pd-nd) {
@@ -1811,15 +1890,6 @@ textarea.pd-in {
         padding-top: 0;
     }
 
-    .pd-ev > .pd-lbl {
-        display: none;
-    }
-
-    .pd-ev-arrow {
-        display: block !important;
-        flex: none;
-    }
-
     .pd-footer {
         padding: 48px 16px 32px;
     }
@@ -1832,8 +1902,8 @@ textarea.pd-in {
         font-size: 20px;
     }
 
-    .pd-modal-body .pd-ph {
-        height: 200px;
+    .pd-modal-body .pd-cert-doc--modal {
+        max-height: 46vh;
     }
 }
 
@@ -1848,11 +1918,22 @@ textarea.pd-in {
     .pd-vb,
     .pd-iconbtn,
     .pd-bigcta,
-    .pd-flip-inner {
+    .pd-flip-inner,
+    .pd-docflip-inner {
         transition: none;
     }
 
     .pd-marquee-track {
+        animation: none;
+    }
+
+    .pd-footer-shapes .sq,
+    .pd-footer-shapes .ci,
+    .pd-footer-shapes .tr {
+        animation: none;
+    }
+
+    .pd-mobilepanel {
         animation: none;
     }
 }

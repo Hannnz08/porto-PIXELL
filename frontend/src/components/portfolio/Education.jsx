@@ -1,5 +1,8 @@
+import { useRef } from "react";
+import { motion, useScroll, useReducedMotion } from "framer-motion";
 import { ArrowRight, Cpu, Network, Wrench } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { MotionBar, EASE } from "@/motion";
 import { EDUCATION } from "@/data/content";
 
 const LEARNED = [
@@ -9,6 +12,10 @@ const LEARNED = [
 ];
 
 export const Education = () => {
+  const tlRef = useRef(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: tlRef, offset: ["start 85%", "end 55%"] });
+
   return (
     <section className="pd-section" id="education" aria-labelledby="education-title" data-testid="education-section">
       <Reveal>
@@ -19,13 +26,18 @@ export const Education = () => {
             <br />
             Journey.
           </h2>
-          <span className="pd-bar" aria-hidden="true" />
+          <MotionBar />
           <span className="pd-lbl pd-rot">Learn. Grow. Build.</span>
           <p>Perjalanan pendidikan yang membentuk dasar pengetahuan dan kemampuan saya di bidang teknologi.</p>
         </div>
       </Reveal>
 
-      <ol className="pd-tl pd-tl--side">
+      <ol className="pd-tl pd-tl--side" ref={tlRef}>
+        {reduced ? (
+          <span className="pd-tl-line" aria-hidden="true" />
+        ) : (
+          <motion.span className="pd-tl-line" style={{ scaleY: scrollYProgress }} aria-hidden="true" />
+        )}
         {EDUCATION.map((e, i) => (
           <li className="pd-row" key={e.school}>
             <div className="pd-tl-year">
@@ -33,16 +45,24 @@ export const Education = () => {
               <p className="pd-lbl">{e.level}</p>
             </div>
             <div className="pd-nd">
-              <span className={e.node !== "orange" ? `is-${e.node}` : ""}>{e.num}</span>
+              <motion.span
+                className={e.node !== "orange" ? `is-${e.node}` : ""}
+                initial={reduced ? false : { scale: 0.4, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.35, delay: 0.1, ease: EASE }}
+              >
+                {e.num}
+              </motion.span>
             </div>
             <Reveal>
               <article className={`pd-card pd-card--accent pd-card--${e.color}`} data-testid={`education-item-${i + 1}`}>
-                <div style={{ display: "flex", justifyContent: "space-between", gap: 16, alignItems: "flex-start" }}>
-                  <div>
+                <div className="pd-edu-headrow" style={{ display: "flex", justifyContent: "space-between", gap: 16, alignItems: "flex-start" }}>
+                  <div className="pd-edu-headtext">
                     <p className="pd-lbl" style={{ margin: 0 }}>
                       Education {e.num}
                     </p>
-                    <h3 className="pd-h" style={{ fontSize: 30, lineHeight: 1.05, marginTop: 4 }}>
+                    <h3 className="pd-h pd-edu-title" style={{ lineHeight: 1.05, marginTop: 4 }}>
                       {e.school}
                     </h3>
                   </div>
@@ -93,7 +113,7 @@ export const Education = () => {
           <h3 className="pd-h" style={{ fontSize: 48 }}>
             What I learned
           </h3>
-          <span className="pd-bar" aria-hidden="true" style={{ marginTop: 16 }} />
+          <MotionBar style={{ marginTop: 16 }} />
           <div className="pd-learn-grid">
             {LEARNED.map((l) => {
               const Icon = l.icon;

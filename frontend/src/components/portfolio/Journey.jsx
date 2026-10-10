@@ -1,10 +1,17 @@
+import { useRef } from "react";
 import { Link } from "react-router-dom";
+import { motion, useScroll, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { TopicIcon } from "./TopicIcon";
+import { MotionBar, EASE } from "@/motion";
 import { JOURNEY } from "@/data/content";
 
 export const Journey = () => {
+  const tlRef = useRef(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: tlRef, offset: ["start 85%", "end 55%"] });
+
   return (
     <section className="pd-section" id="journey" aria-labelledby="journey-title" data-testid="journey-section">
       <Reveal>
@@ -15,7 +22,7 @@ export const Journey = () => {
             <br />
             Test. Improve.
           </h2>
-          <span className="pd-bar" aria-hidden="true" />
+          <MotionBar />
           <p style={{ maxWidth: 680 }}>
             Perjalanan belajar saya dalam memahami jaringan komputer, administrasi server, dan keamanan jaringan
             melalui teori dan praktik.
@@ -23,7 +30,12 @@ export const Journey = () => {
         </div>
       </Reveal>
 
-      <ol className="pd-tl pd-tl--center">
+      <ol className="pd-tl pd-tl--center" ref={tlRef}>
+        {reduced ? (
+          <span className="pd-tl-line" aria-hidden="true" />
+        ) : (
+          <motion.span className="pd-tl-line" style={{ scaleY: scrollYProgress }} aria-hidden="true" />
+        )}
         {JOURNEY.map((j, i) => {
           const left = i % 2 === 0;
           const card = (
@@ -73,7 +85,14 @@ export const Journey = () => {
             <li className="pd-row" key={j.stage}>
               {left ? card : <div />}
               <div className="pd-nd">
-                <span>{String(i + 1).padStart(2, "0")}</span>
+                <motion.span
+                  initial={reduced ? false : { scale: 0.4, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.35, delay: 0.1, ease: EASE }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </motion.span>
               </div>
               {left ? <div /> : card}
             </li>

@@ -1,5 +1,6 @@
 import { ArrowRight, GraduationCap, Target, Flag, BookOpen, Network } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { MotionBar } from "@/motion";
 
 const CARDS = [
   {
@@ -65,7 +66,7 @@ export const About = () => {
               <br />
               Dekat
             </h2>
-            <span className="pd-bar" aria-hidden="true" />
+            <MotionBar />
             <p style={{ margin: 0, maxWidth: 420, fontSize: 18, lineHeight: 1.55 }}>
               Saya siswa SMK jurusan Teknik Jaringan Komputer dan Telekomunikasi (TJKT). Saya tertarik mempelajari
               jaringan komputer, konfigurasi perangkat, administrasi server, dan troubleshooting melalui praktik

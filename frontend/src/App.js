@@ -72,6 +72,7 @@ const Shell = () => {
 
 function App() {
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return undefined;
     const lenis = new Lenis({ lerp: 0.09, anchors: true });
     window.__lenis = lenis;
     let raf;

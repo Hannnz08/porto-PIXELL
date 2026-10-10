@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const LINES = [
@@ -8,11 +8,13 @@ const LINES = [
 ];
 
 export const Welcome = ({ onEnter }) => {
+  const reduced = useReducedMotion();
+
   return (
     <motion.div
       className="pd-welcome"
       data-testid="welcome-screen"
-      exit={{ y: "-100%", transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] } }}
+      exit={{ opacity: 0, y: reduced ? 0 : "-100%", transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] } }}
     >
       <span className="pd-welcome-corner pd-welcome-corner--tl" aria-hidden="true" />
       <span className="pd-welcome-corner pd-welcome-corner--tr" aria-hidden="true" />
@@ -24,8 +26,8 @@ export const Welcome = ({ onEnter }) => {
           <span className="pd-mask" key={l.text}>
             <motion.span
               className="pd-mask-inner"
-              initial={{ y: "115%" }}
-              animate={{ y: 0 }}
+              initial={reduced ? { opacity: 0 } : { y: "115%" }}
+              animate={reduced ? { opacity: 1 } : { y: 0 }}
               transition={{ delay: 0.25 + i * 0.14, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
               {l.mark ? <span className="pd-mark">{l.text}</span> : l.text}
@@ -37,7 +39,7 @@ export const Welcome = ({ onEnter }) => {
       <motion.div
         className="pd-welcome-badge"
         data-testid="welcome-badge"
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: reduced ? 0 : 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.85, duration: 0.4 }}
       >
@@ -54,7 +56,7 @@ export const Welcome = ({ onEnter }) => {
       </motion.p>
 
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
+        initial={{ opacity: 0, y: reduced ? 0 : 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2, duration: 0.4 }}
         style={{ marginTop: 40 }}

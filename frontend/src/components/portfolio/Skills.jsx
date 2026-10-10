@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { TopicIcon } from "./TopicIcon";
+import { MotionBar, EASE } from "@/motion";
 import { SKILLS, SKILL_FILTERS } from "@/data/content";
 
 export const Skills = () => {
   const [filter, setFilter] = useState("all");
+  const reduced = useReducedMotion();
   const visible = SKILLS.filter((s) => filter === "all" || s.cat === filter);
 
   return (
@@ -18,7 +20,7 @@ export const Skills = () => {
             <br />
             Systems I build.
           </h2>
-          <span className="pd-bar" aria-hidden="true" />
+          <MotionBar />
           <p>Teknologi yang saya pelajari dan gunakan dalam praktik laboratorium.</p>
         </div>
       </Reveal>
@@ -40,14 +42,15 @@ export const Skills = () => {
 
       <div className="pd-skills-grid">
         <AnimatePresence mode="popLayout">
-          {visible.map((s) => (
+          {visible.map((s, idx) => (
             <motion.article
               key={s.id}
               layout
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.25 }}
+              initial={{ opacity: 0, y: reduced ? 0 : 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              exit={{ opacity: 0, scale: 0.97 }}
+              transition={{ duration: 0.3, delay: idx * 0.06, ease: EASE }}
               className={`pd-card ${s.color === "black" ? "pd-card--black" : `pd-card--accent pd-card--${s.color}`}`}
               data-testid={`skill-card-${s.id}`}
             >

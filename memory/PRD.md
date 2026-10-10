@@ -18,6 +18,19 @@ Personal portfolio for HANN.DEV — TJKT student (Networking · Linux · Securit
 - Motion: framer-motion (masked line-by-line hero reveal, scroll reveals, certificate flip) + lenis smooth scrolling + CSS editorial marquee; reduced-motion respected
 - Backend: FastAPI + MongoDB; `POST /api/contact` stores messages; `/api/status` + `/api/` retained
 
+## Implemented (2026-10-10, update 7 — Premium Animation System)
+- Shared motion tokens (src/motion.js): EASE cubic-bezier(0.22,1,0.36,1), duration scale, useReduced/useFinePointer hooks, MotionBar (orange bar scale-X line reveal on all section heads).
+- Welcome: reduced-motion-safe (fade instead of mask), fade+vertical exit into homepage.
+- Hero: damped pointer parallax on 3 decorative layers (lime back panel / portrait frame / tags; mouse-only, off on touch + reduced-motion); scroll parallax kept; masked headline reveal.
+- Navbar: animated active-section pill (framer layoutId, 250ms); mobile panel quick fade-slide.
+- Skills/Projects: viewport-triggered staggered reveals (no more on-load animation), smooth filter transitions; large project cards (span 7) get subtle 4° spring-damped pointer tilt, desktop only.
+- Topology SVGs: connector stroke-reveal + staggered node fade-in on scroll; node hover highlights lime.
+- Timelines (Journey/Education): scroll-driven line growth (scaleY) + node badge scale-in.
+- Footer: slow ambient drift on the 3 geometric shapes (20–26s cycles).
+- All button/card micro-interactions retimed to the shared easing; press physics preserved.
+- Reduced motion: lenis disabled, parallax/tilt/drift/marquee off, reveals become opacity-only, flips instant, smooth scroll falls back to native instant.
+- Fixed mobile (≤640px) Education overflow: school title moved from inline style to .pd-edu-title (21px), logo wraps to its own row, no mid-word breaks, no horizontal overflow.
+
 ## Implemented (2026-10-10, update 6)
 - Added 2 real certificates (5 total): Cisco Networking Academy "Networking Basics" (21 Mei 2026, Cert ID 9035efa2-…-add78a, 1 page) and Citraweb Solusi Teknologi "Sertifikat Kompetensi PKL" (27 Juli 2026, 2 pages, flip shows Daftar Nilai page). Hero evidence card now "5 Sertifikat · MTCNA · Cisco · DTA · Citraweb".
 - Real contact links wired: Instagram @0frhn.rfqi__, GitHub Hannnz08, LinkedIn farhan-rifqi-ramadhani (cards are now clickable, open in new tab). Email card stays a placeholder (no address supplied). Footer social links added (GitHub/LinkedIn/Instagram).

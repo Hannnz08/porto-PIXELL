@@ -1,10 +1,74 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "./Reveal";
 import { Topology } from "./Topology";
+import { MotionBar, EASE, useFinePointer } from "@/motion";
 import { PROJECTS, PROJECT_FILTERS } from "@/data/content";
+
+const ProjectCard = ({ p, idx }) => {
+  const reduced = useReducedMotion();
+  const fine = useFinePointer();
+  const rx = useMotionValue(0);
+  const ry = useMotionValue(0);
+  const srx = useSpring(rx, { stiffness: 150, damping: 16 });
+  const sry = useSpring(ry, { stiffness: 150, damping: 16 });
+  const tilt = !reduced && fine && p.span === 7;
+
+  const onPointerMove = (e) => {
+    if (!tilt) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    ry.set(((e.clientX - r.left) / r.width - 0.5) * 4);
+    rx.set(-((e.clientY - r.top) / r.height - 0.5) * 4);
+  };
+  const onPointerLeave = () => {
+    rx.set(0);
+    ry.set(0);
+  };
+
+  return (
+    <motion.article
+      layout
+      initial={{ opacity: 0, y: reduced ? 0 : 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      exit={{ opacity: 0, scale: 0.97 }}
+      transition={{ duration: 0.3, delay: idx * 0.06, ease: EASE }}
+      style={tilt ? { rotateX: srx, rotateY: sry, transformPerspective: 1000 } : undefined}
+      whileHover={tilt ? { y: -4 } : undefined}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
+      className={`pd-pc pd-pc--span${p.span} ${p.color === "panel" ? "pd-pc--panel" : `pd-pc--accent pd-pc--${p.color}`} ${
+        tilt ? "pd-pc--tilt" : ""
+      }`}
+      data-testid={`project-card-${p.slug}`}
+    >
+      <div className="pd-dg">
+        <Topology kind={p.topo} />
+        <span className="pd-lbl pd-dg-tag">Sample diagram · ganti dengan topologi asli</span>
+      </div>
+      <div className="pd-pc-body">
+        <span className="pd-lbl pd-cat">{p.catLabel}</span>
+        <h3 className="pd-h">{p.title}</h3>
+        <p>{p.desc}</p>
+        <ul className="pd-chips" style={{ margin: 0 }}>
+          {p.tags.map((t) => (
+            <li key={t}>{t}</li>
+          ))}
+        </ul>
+        <Link
+          to={`/projects/${p.slug}`}
+          className="pd-btn pd-btn--surface"
+          aria-label={`View case study: ${p.title}`}
+          data-testid={`project-case-link-${p.slug}`}
+        >
+          View Case Study <ArrowRight size={16} strokeWidth={2.25} />
+        </Link>
+      </div>
+    </motion.article>
+  );
+};
 
 export const Projects = () => {
   const [filter, setFilter] = useState("all");
@@ -20,7 +84,7 @@ export const Projects = () => {
             <br />
             prove my skills.
           </h2>
-          <span className="pd-bar" aria-hidden="true" />
+          <MotionBar />
           <p>
             Dokumentasi proyek laboratorium dan praktik yang membantu saya memahami jaringan komputer, server, dan
             keamanan jaringan.
@@ -45,42 +109,8 @@ export const Projects = () => {
 
       <div className="pd-projects-grid">
         <AnimatePresence mode="popLayout">
-          {visible.map((p) => (
-            <motion.article
-              key={p.slug}
-              layout
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.25 }}
-              className={`pd-pc pd-pc--span${p.span} ${
-                p.color === "panel" ? "pd-pc--panel" : `pd-pc--accent pd-pc--${p.color}`
-              }`}
-              data-testid={`project-card-${p.slug}`}
-            >
-              <div className="pd-dg">
-                <Topology kind={p.topo} />
-                <span className="pd-lbl pd-dg-tag">Sample diagram · ganti dengan topologi asli</span>
-              </div>
-              <div className="pd-pc-body">
-                <span className="pd-lbl pd-cat">{p.catLabel}</span>
-                <h3 className="pd-h">{p.title}</h3>
-                <p>{p.desc}</p>
-                <ul className="pd-chips" style={{ margin: 0 }}>
-                  {p.tags.map((t) => (
-                    <li key={t}>{t}</li>
-                  ))}
-                </ul>
-                <Link
-                  to={`/projects/${p.slug}`}
-                  className="pd-btn pd-btn--surface"
-                  aria-label={`View case study: ${p.title}`}
-                  data-testid={`project-case-link-${p.slug}`}
-                >
-                  View Case Study <ArrowRight size={16} strokeWidth={2.25} />
-                </Link>
-              </div>
-            </motion.article>
+          {visible.map((p, idx) => (
+            <ProjectCard key={p.slug} p={p} idx={idx} />
           ))}
         </AnimatePresence>
       </div>

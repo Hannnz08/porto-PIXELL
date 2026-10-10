@@ -3,6 +3,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { Mail, Github, Linkedin, Instagram, ArrowUpRight, Send } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { MotionBar } from "@/motion";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -74,7 +75,7 @@ export const Contact = () => {
               <br />
               connect.
             </h2>
-            <span className="pd-bar" aria-hidden="true" />
+            <MotionBar />
             <p style={{ margin: 0, maxWidth: 440, fontSize: 18, lineHeight: 1.55 }}>
               Jika ingin berdiskusi tentang jaringan komputer, proyek IT, atau peluang PKL, silakan hubungi saya.
             </p>

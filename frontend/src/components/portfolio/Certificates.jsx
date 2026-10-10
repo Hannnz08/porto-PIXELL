@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { RotateCw, Expand, X, ExternalLink } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { MotionBar } from "@/motion";
 import { CERTIFICATES } from "@/data/content";
 
 const CertModal = ({ cert, onClose }) => {
@@ -224,7 +225,7 @@ export const Certificates = () => {
           <h2 className="pd-h pd-h2" id="certs-title">
             Certificates
           </h2>
-          <span className="pd-bar" aria-hidden="true" />
+          <MotionBar />
           <p>Dokumen sertifikat asli. Klik atau ketuk kartu untuk membaliknya, atau buka versi ukuran penuh.</p>
         </div>
       </Reveal>

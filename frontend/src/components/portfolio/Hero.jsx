@@ -1,7 +1,8 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useMotionValue, useSpring, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, User } from "lucide-react";
 import { Reveal } from "./Reveal";
+import { EASE } from "@/motion";
 
 const TITLE_LINES = [
   { text: "Building", mark: false },
@@ -17,18 +18,50 @@ const EVIDENCE = [
 ];
 
 export const Hero = ({ active }) => {
+  const heroRef = useRef(null);
   const figRef = useRef(null);
+  const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: figRef, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [36, -36]);
 
+  const px = useMotionValue(0);
+  const py = useMotionValue(0);
+  const sx = useSpring(px, { stiffness: 55, damping: 16, mass: 0.7 });
+  const sy = useSpring(py, { stiffness: 55, damping: 16, mass: 0.7 });
+  const backX = useTransform(sx, (v) => v * 26);
+  const backY = useTransform(sy, (v) => v * 26);
+  const frameX = useTransform(sx, (v) => v * 12);
+  const frameY = useTransform(sy, (v) => v * 12);
+  const tagsX = useTransform(sx, (v) => v * 18);
+  const tagsY = useTransform(sy, (v) => v * 10);
+
+  const onPointerMove = (e) => {
+    if (reduced || e.pointerType !== "mouse" || !heroRef.current) return;
+    const r = heroRef.current.getBoundingClientRect();
+    px.set((e.clientX - r.left) / r.width - 0.5);
+    py.set((e.clientY - r.top) / r.height - 0.5);
+  };
+  const onPointerLeave = () => {
+    px.set(0);
+    py.set(0);
+  };
+
   return (
-    <section className="pd-hero" id="home" aria-labelledby="hero-title" data-testid="hero-section">
+    <section
+      className="pd-hero"
+      id="home"
+      aria-labelledby="hero-title"
+      data-testid="hero-section"
+      ref={heroRef}
+      onPointerMove={onPointerMove}
+      onPointerLeave={onPointerLeave}
+    >
       <div className="pd-hero-left">
         <motion.span
           className="pd-tag pd-tag--cyan"
-          initial={{ opacity: 0, y: 12 }}
+          initial={{ opacity: 0, y: reduced ? 0 : 12 }}
           animate={active ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.1, duration: 0.4 }}
+          transition={{ delay: 0.1, duration: 0.4, ease: EASE }}
         >
           TJKT Student
         </motion.span>
@@ -38,9 +71,9 @@ export const Hero = ({ active }) => {
             <span className="pd-mask" key={l.text}>
               <motion.span
                 className="pd-mask-inner"
-                initial={{ y: "115%" }}
-                animate={active ? { y: 0 } : {}}
-                transition={{ delay: 0.2 + i * 0.12, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                initial={reduced ? { opacity: 0 } : { y: "115%" }}
+                animate={active ? (reduced ? { opacity: 1 } : { y: 0 }) : {}}
+                transition={{ delay: 0.2 + i * 0.12, duration: 0.75, ease: EASE }}
               >
                 {l.mark ? <span className="pd-mark">{l.text}</span> : l.text}
               </motion.span>
@@ -50,9 +83,9 @@ export const Hero = ({ active }) => {
 
         <motion.p
           className="pd-hero-lead"
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: reduced ? 0 : 16 }}
           animate={active ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.75, duration: 0.5 }}
+          transition={{ delay: 0.75, duration: 0.5, ease: EASE }}
         >
           Saya siswa SMK jurusan TJKT yang memiliki ketertarikan di bidang jaringan komputer, server, dan keamanan
           jaringan.
@@ -60,9 +93,9 @@ export const Hero = ({ active }) => {
 
         <motion.div
           className="pd-hero-ctas"
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: reduced ? 0 : 16 }}
           animate={active ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.9, duration: 0.5 }}
+          transition={{ delay: 0.9, duration: 0.5, ease: EASE }}
         >
           <a href="#projects" className="pd-btn" data-testid="hero-cta-projects">
             Lihat Proyek <ArrowRight size={18} strokeWidth={2.5} />
@@ -74,9 +107,9 @@ export const Hero = ({ active }) => {
 
         <motion.div
           className="pd-evgrid"
-          initial={{ opacity: 0, y: 24 }}
+          initial={{ opacity: 0, y: reduced ? 0 : 24 }}
           animate={active ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.05, duration: 0.55 }}
+          transition={{ delay: 1.05, duration: 0.55, ease: EASE }}
         >
           {EVIDENCE.map((ev) => (
             <a key={ev.id} href={ev.href} className="pd-ev" data-testid={`hero-evidence-${ev.id}`}>
@@ -93,13 +126,14 @@ export const Hero = ({ active }) => {
       </div>
 
       <figure className="pd-hero-right" ref={figRef}>
-        <motion.div className="pd-portrait-wrap" style={{ y }}>
-          <div className="pd-portrait-back" aria-hidden="true" />
+        <motion.div className="pd-portrait-wrap" style={{ y: reduced ? 0 : y }}>
+          <motion.div className="pd-portrait-back" style={{ x: backX, y: backY }} aria-hidden="true" />
           <motion.div
             className="pd-portrait"
-            initial={{ opacity: 0, rotate: 2, scale: 0.96 }}
+            style={{ x: frameX, y: frameY }}
+            initial={{ opacity: 0, rotate: reduced ? 0 : 2, scale: reduced ? 1 : 0.96 }}
             animate={active ? { opacity: 1, rotate: 0, scale: 1 } : {}}
-            transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.5, duration: 0.7, ease: EASE }}
           >
             <div className="pd-portrait-inner">
               <User size={64} strokeWidth={1.75} />
@@ -109,11 +143,11 @@ export const Hero = ({ active }) => {
           <figcaption className="pd-lbl pd-figcap">FIG.01 / Profile</figcaption>
         </motion.div>
         <Reveal delay={0.2}>
-          <div className="pd-hero-tags">
+          <motion.div className="pd-hero-tags" style={{ x: tagsX, y: tagsY }}>
             <span className="pd-tag pd-tag--cyan">Network Engineering</span>
             <span className="pd-tag">MikroTik</span>
             <span className="pd-tag">GNS3</span>
-          </div>
+          </motion.div>
         </Reveal>
       </figure>
     </section>
